@@ -1136,10 +1136,74 @@ body.loaded .loading-screen {
         font-size: 2.5rem;
     }
     
+    /* SOBRE NOSOTROS */
+    #sobre-nosotros {
+        padding: 40px 0;
+    }
+    
+    /* PLANTILLA - CORRECCIONES CRÍTICAS */
+    #plantilla {
+        padding-bottom: 3rem !important;
+        margin-bottom: 2rem !important;
+        position: relative;
+        z-index: 2;
+        overflow: visible !important;
+        height: auto !important;
+        min-height: auto !important;
+    }
+    
+    #plantilla-container {
+        overflow: visible !important;
+        height: auto !important;
+        max-height: none !important;
+        padding-bottom: 1rem;
+    }
+    
+    #plantilla-container.collapsed {
+        max-height: 400px !important;
+        overflow: hidden !important;
+    }
+    
+    #plantilla-container:not(.collapsed) {
+        max-height: none !important;
+    }
+    
+    .player-card {
+        margin-bottom: 1.5rem;
+        transform: none !important;
+        animation: none !important;
+        opacity: 1 !important;
+    }
+    
+    .player-card:hover {
+        transform: translateY(-8px) scale(1.01);
+    }
+    
+    .player-card:last-child {
+        margin-bottom: 2rem !important;
+    }
+    
+    #plantilla-container .col-md-4.col-lg-3 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 1rem;
+    }
+    
+    /* CALENDARIO - CORRECCIONES PARA EVITAR SOLAPAMIENTO */
+    #calendario {
+        padding-top: 2rem !important;
+        margin-top: 0 !important;
+        position: relative;
+        z-index: 1;
+        clear: both;
+        overflow: visible !important;
+    }
+    
     .match-card {
         flex-direction: column;
         text-align: center;
         padding: 15px;
+        margin-bottom: 1.5rem;
     }
     
     .team-logo {
@@ -1158,33 +1222,14 @@ body.loaded .loading-screen {
         justify-content: center;
     }
     
-    .navbar-nav .nav-link {
-        padding: 8px 15px !important;
-        margin: 2px 0;
-        text-align: center;
+    /* STARBOY */
+    #starboy {
+        padding: 40px 0;
     }
     
-    .player-card, .starboy-card {
-        margin-bottom: 1rem;
-    }
-    
-    .map-container {
-        height: 250px;
-        margin-bottom: 2rem;
-    }
-        .player-card:hover {
-        transform: translateY(-8px) scale(1.01);
-    }
-    
-    .dorsal {
-        font-size: 4rem;
-    }
-    
-    .player-info h4 {
-        font-size: 1.1rem;
-    }
-        #starboy .starboy-card {
+    #starboy .starboy-card {
         transform: none !important;
+        margin-bottom: 1.5rem;
     }
     
     #starboy .starboy-card:hover {
@@ -1195,11 +1240,59 @@ body.loaded .loading-screen {
         transform: none !important;
     }
     
-    
-    /* Eliminar transiciones en móvil para Starboy */
     #starboy .starboy-card,
     #starboy .starboy-card .player-image-container img {
         transition: none !important;
+    }
+    
+    /* NAVBAR */
+    .navbar-nav .nav-link {
+        padding: 8px 15px !important;
+        margin: 2px 0;
+        text-align: center;
+    }
+    
+    /* ELEMENTOS GENERALES */
+    .dorsal {
+        font-size: 4rem;
+    }
+    
+    .player-info h4 {
+        font-size: 1.1rem;
+    }
+    
+    .map-container {
+        height: 250px;
+        margin-bottom: 2rem;
+    }
+    
+    /* SECTION HEADER */
+    .section-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .toggle-btn {
+        margin-top: 15px;
+        width: 35px;
+        height: 35px;
+    }
+    
+    .toggle-btn i {
+        font-size: 1rem;
+    }
+    
+    /* CLEARFIX PARA EVITAR SOLAPAMIENTOS */
+    section {
+        clear: both;
+        overflow: visible !important;
+    }
+    
+    #plantilla::after {
+        content: '';
+        display: block;
+        height: 1rem;
+        clear: both;
     }
 }
 
