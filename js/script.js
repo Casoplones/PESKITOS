@@ -317,6 +317,33 @@ function initPreloader() {
     });
 }
 
+// Función para expandir/plegar la plantilla
+function initTogglePlantilla() {
+    const toggleBtn = document.getElementById('toggle-plantilla');
+    const plantillaContainer = document.getElementById('plantilla-container');
+    const icon = toggleBtn.querySelector('i');
+    
+    let isExpanded = true;
+    
+    toggleBtn.addEventListener('click', function() {
+        isExpanded = !isExpanded;
+        
+        // Cambiar icono
+        if (isExpanded) {
+            icon.classList.remove('fa-chevron-up');
+            icon.classList.add('fa-chevron-down');
+            plantillaContainer.classList.remove('collapsed');
+        } else {
+            icon.classList.remove('fa-chevron-down');
+            icon.classList.add('fa-chevron-up');
+            plantillaContainer.classList.add('collapsed');
+        }
+        
+        // Añadir efecto de transición suave
+        plantillaContainer.style.transition = 'all 0.4s ease';
+    });
+}
+
 // Inicializar todo cuando se carga la página
 document.addEventListener('DOMContentLoaded', function() {
     generarPlantilla();
@@ -329,4 +356,5 @@ document.addEventListener('DOMContentLoaded', function() {
     initHeaderEffects();
     initActiveNav();
     initPreloader();
+    initTogglePlantilla();
 });
