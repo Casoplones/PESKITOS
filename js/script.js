@@ -25,6 +25,7 @@ const partidos = [
         fecha: "15/10/2023", 
         hora: "18:00", 
         lugar: "SMP Retiro",
+        equipacion: "blanca",
         escudo: "/img/equipos/inter.png"
     },
     { 
@@ -33,6 +34,7 @@ const partidos = [
         fecha: "22/10/2023", 
         hora: "17:30", 
         lugar: "SMP Retiro",
+        equipacion: "blanca",
         escudo: "/img/equipos/inter.png"
     },
     { 
@@ -41,6 +43,7 @@ const partidos = [
         fecha: "29/10/2023", 
         hora: "19:00", 
         lugar: "SMP Retiro",
+        equipacion: "blanca",
         escudo: "/img/equipos/inter.png"
     },
     { 
@@ -49,6 +52,7 @@ const partidos = [
         fecha: "05/11/2023", 
         hora: "16:00", 
         lugar: "SMP Retiro",
+        equipacion: "blanca",
         escudo: "/img/equipos/inter.png"
     }
 ];
@@ -133,11 +137,11 @@ function generarCalendario() {
                 </div>
                 <div class="vs-container">
                     <div class="team-name ${partido.local ? 'rival' : 'peskitos'}">
-                        ${partido.local ? partido.rival : 'PESKITOS FC'}
+                        ${partido.local ? partido.rival : 'PESKITOS'}
                     </div>
                     <div class="vs-badge">VS</div>
                     <div class="team-name ${partido.local ? 'peskitos' : 'rival'}">
-                        ${partido.local ? 'PESKITOS FC' : partido.rival}
+                        ${partido.local ? 'PESKITOS' : partido.rival}
                     </div>
                 </div>
             </div>
@@ -156,6 +160,10 @@ function generarCalendario() {
                     <div class="detail-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <span class="detail-text">${partido.lugar}</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-shirt"></i>
+                        <span class="detail-text">${partido.equipacion}</span>
                     </div>
                 </div>
             </div>
