@@ -123,14 +123,15 @@ function generarPlantilla() {
     initFiltrosPlantilla();
 }
 
-// Función para expandir/plegar la plantilla (VERSIÓN CORRECTA)
+// Función para expandir/plegar la plantilla (MEJORADA PARA MÓVIL)
 function initTogglePlantilla() {
     const toggleBtn = document.getElementById('toggle-plantilla');
     const plantillaContainer = document.getElementById('plantilla-container');
     const filtrosContainer = document.getElementById('filtros-container');
+    const plantillaSection = document.getElementById('plantilla');
     const icon = toggleBtn.querySelector('i');
     
-    if (!toggleBtn || !plantillaContainer || !filtrosContainer) {
+    if (!toggleBtn || !plantillaContainer || !filtrosContainer || !plantillaSection) {
         console.error('Elementos necesarios para toggle no encontrados');
         return;
     }
@@ -145,26 +146,46 @@ function initTogglePlantilla() {
             icon.classList.remove('fa-chevron-up');
             icon.classList.add('fa-chevron-down');
             plantillaContainer.classList.remove('collapsed');
-            if (filtrosContainer) {
-                filtrosContainer.classList.remove('collapsed');
-            }
+            filtrosContainer.classList.remove('collapsed');
+            plantillaSection.classList.remove('container-collapsed', 'container-collapsed-mobile');
         } else {
             icon.classList.remove('fa-chevron-down');
             icon.classList.add('fa-chevron-up');
             plantillaContainer.classList.add('collapsed');
-            if (filtrosContainer) {
-                filtrosContainer.classList.add('collapsed');
+            filtrosContainer.classList.add('collapsed');
+            
+            // Añadir clases específicas para móvil
+            if (window.innerWidth <= 768) {
+                plantillaSection.classList.add('container-collapsed');
+                if (window.innerWidth <= 576) {
+                    plantillaSection.classList.add('container-collapsed-mobile');
+                }
             }
         }
         
         // Añadir efecto de transición suave
-        plantillaContainer.style.transition = 'all 0.4s ease';
-        if (filtrosContainer) {
-            filtrosContainer.style.transition = 'all 0.4s ease';
+        plantillaContainer.style.transition = 'all 0.3s ease';
+        filtrosContainer.style.transition = 'all 0.3s ease';
+        plantillaSection.style.transition = 'padding 0.3s ease';
+        
+        // Forzar reflow para mejor animación
+        void plantillaSection.offsetWidth;
+    });
+    
+    // Ajustar dinámicamente según el tamaño de pantalla
+    window.addEventListener('resize', function() {
+        if (!isExpanded) {
+            if (window.innerWidth <= 768) {
+                plantillaSection.classList.add('container-collapsed');
+                if (window.innerWidth <= 576) {
+                    plantillaSection.classList.add('container-collapsed-mobile');
+                }
+            } else {
+                plantillaSection.classList.remove('container-collapsed', 'container-collapsed-mobile');
+            }
         }
     });
 }
-
 // Función de filtrado (MEJORADA CON VALIDACIONES)
 function initFiltrosPlantilla() {
     const filterButtons = document.querySelectorAll('.filter-btn');

@@ -2402,3 +2402,86 @@ body.loaded .loading-screen {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--secondary-color);
 }
+
+/* Añade esto al final de tu archivo CSS, en la sección de media queries para móvil */
+
+@media (max-width: 768px) {
+    /* Corrección específica para la sección plantilla cuando está colapsada */
+    #plantilla {
+        position: relative;
+        padding: 40px 0 !important;
+        min-height: auto !important;
+    }
+    
+    #plantilla-container.collapsed,
+    #filtros-container.collapsed {
+        max-height: 0 !important;
+        opacity: 0;
+        overflow: hidden;
+        margin: 0 !important;
+        padding: 0 !important;
+        transform: translateY(-20px);
+        transition: all 0.3s ease;
+    }
+    
+    #plantilla-container:not(.collapsed),
+    #filtros-container:not(.collapsed) {
+        max-height: none !important;
+        opacity: 1;
+        margin-bottom: 1rem;
+        transform: translateY(0);
+        transition: all 0.4s ease;
+    }
+    
+    /* Reducir el padding de la sección cuando está colapsada */
+    #plantilla.container-collapsed {
+        padding: 20px 0 !important;
+    }
+    
+    /* Ajustar el margen inferior del header de sección */
+    .section-header {
+        margin-bottom: 2rem !important;
+    }
+    
+    /* Asegurar que no hay espacio extra entre elementos */
+    .player-col {
+        margin-bottom: 1rem;
+    }
+    
+    .player-card {
+        margin-bottom: 1rem;
+    }
+    
+    /* Corrección para el contenedor de filtros */
+    .filter-container {
+        margin-bottom: 1.5rem;
+        padding: 15px;
+    }
+    
+    .filtros-wrapper.collapsed {
+        margin-bottom: 0;
+        height: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Correcciones más específicas para móviles pequeños */
+    #plantilla {
+        padding: 30px 0 !important;
+    }
+    
+    #plantilla-container.collapsed,
+    #filtros-container.collapsed {
+        transform: translateY(-15px);
+    }
+    
+    .section-header {
+        margin-bottom: 1.5rem !important;
+    }
+    
+    /* Reducir aún más el espacio cuando está colapsado */
+    #plantilla.container-collapsed-mobile {
+        padding: 15px 0 !important;
+        min-height: 100px !important;
+    }
+}
