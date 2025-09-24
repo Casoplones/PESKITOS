@@ -196,31 +196,136 @@
     </div>
 </section>
 
-    <!-- Footer -->
-    <!-- Footer -->
+<!-- Footer Rediseñado -->
 <footer class="py-5">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mb-4 mb-lg-0">
-                <div class="map-container">
+        <!-- Sección principal del footer -->
+        <div class="row mb-5">
+            <!-- Información del club -->
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <div class="footer-brand">
+                    <img src="./img/equipos/escudo-peskitos.png" alt="Peskitos FC" height="60" class="mb-3">
+                    <h3 class="footer-title">PESKITOS FC</h3>
+                    <p class="footer-description">Pasión, Compromiso y Espíritu Deportivo desde 2022</p>
+                    <div class="footer-info">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>SMP Retiro, Madrid</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-flag"></i>
+                            <span>Liga Local de Fútbol 7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Enlaces rápidos -->
+            <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                <h4 class="footer-section-title">Enlaces Rápidos</h4>
+                <ul class="footer-links">
+                    <li><a href="#sobre-nosotros"><i class="fas fa-chevron-right"></i> Sobre Nosotros</a></li>
+                    <li><a href="#plantilla"><i class="fas fa-chevron-right"></i> Plantilla</a></li>
+                    <li><a href="#calendario"><i class="fas fa-chevron-right"></i> Calendario</a></li>
+                    <li><a href="#starboy"><i class="fas fa-chevron-right"></i> Playmakers</a></li>
+                </ul>
+            </div>
+            
+            <!-- Contacto -->
+            <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+                <h4 class="footer-section-title">Contacto</h4>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <span>Email</span>
+                            <a href="mailto:info@peskitosfc.com">info@peskitosfc.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <span>Teléfono</span>
+                            <a href="tel:+34623509894">+34 623 509 894</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <span>Partidos</span>
+                            <span>Domingo - desde 16:00 hasta 21:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Redes sociales y mapa -->
+            <div class="col-lg-3 col-md-4">
+                <h4 class="footer-section-title">Síguenos</h4>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/peskitosfc/" target="_blank" class="social-link instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="#" class="social-link whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
+                
+                <div class="footer-cta mt-4">
+                    <p>¿Quieres unirte al equipo?</p>
+                    <button class="btn-join">Contáctanos</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mapa -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="map-container-enhanced">
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2349.5118190483668!2d-3.673520325036583!3d40.41432797143999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4228a827e58179%3A0x4f6c2567a77afcf5!2sCentro%20Deportivo%20SMP!5e1!3m2!1ses!2ses!4v1758575068624!5m2!1ses!2ses" 
                         width="100%" 
                         height="100%" 
-                        style="border:0; border-radius: 10px;" 
+                        style="border:0; border-radius: 15px;" 
                         allowfullscreen="" 
                         loading="lazy" 
                         referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
+                    <div class="map-overlay">
+                        <div class="overlay-content">
+                            <h5>Nuestro Campo</h5>
+                            <p>Centro Deportivo SMP Retiro</p>
+                            <a href="https://maps.google.com/?q=Centro+Deportivo+SMP+Retiro" target="_blank" class="btn-directions">
+                                <i class="fas fa-directions"></i> Cómo llegar
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center">
-                <h3 class="mb-3">Síguenos en redes</h3>
-                <a href="https://www.instagram.com/peskitosfc/?__pwa=1" target="_blank" class="social-link">
-                    <i class="fab fa-instagram fa-3x"></i>
-                </a>
+        </div>
+        
+        <!-- Línea separadora -->
+        <div class="footer-divider"></div>
+        
+        <!-- Copyright -->
+        <div class="row">
+            <div class="col-md-6">
+                <p class="copyright">&copy; 2024 Peskitos FC. Todos los derechos reservados.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <div class="footer-legal">
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos de Uso</a>
+                </div>
             </div>
         </div>
+    </div>
+    
+    <!-- Botón de volver arriba -->
+    <div class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
     </div>
 </footer>
 

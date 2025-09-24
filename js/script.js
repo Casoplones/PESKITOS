@@ -452,6 +452,52 @@ function initAboutImageEffect() {
     });
 }
 
+// Funcionalidades para el footer mejorado
+function initFooterFunctionalities() {
+    // Botón volver arriba
+    const backToTop = document.querySelector('.back-to-top');
+    
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+    
+    backToTop.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // Efectos hover para enlaces del footer
+    const footerLinks = document.querySelectorAll('.footer-links a, .social-link');
+    
+    footerLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+    
+    // Botón de unirse al equipo
+    const joinButton = document.querySelector('.btn-join');
+    if (joinButton) {
+        joinButton.addEventListener('click', function() {
+            // Scroll a la sección de contacto o abrir formulario
+            const contactSection = document.querySelector('.contact-info');
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+}
+
 // Inicializar todo cuando se carga la página
 document.addEventListener('DOMContentLoaded', function() {
     generarPlantilla();
@@ -469,16 +515,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initAboutCardsAnimation();
     initAboutCardsHover();
     initAboutImageEffect();
-});
+    initFooterFunctionalities();
 
-// Manejar el redimensionamiento de la ventana
-window.addEventListener('resize', function() {
-    // Re-generar starboy en móvil si es necesario
-    if (window.innerWidth <= 768 || window.innerWidth > 768) {
-        const starboyContainer = document.getElementById('starboy-container');
-        if (starboyContainer) {
-            starboyContainer.innerHTML = '';
-            generarStarboy();
-        }
-    }
 });
