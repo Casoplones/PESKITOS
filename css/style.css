@@ -2106,6 +2106,7 @@ body.loaded .loading-screen {
     transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
+
 /* Responsive Design */
 @media (max-width: 1200px) {
     .dorsal {

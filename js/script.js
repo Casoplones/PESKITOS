@@ -1,20 +1,20 @@
 // Datos de ejemplo para la plantilla
 const jugadores = [
-    { nombre: "Nacho", dorsal: 88, posicion: "Portero", foto: "/img/jugadores/cr7.jpg" },
-    { nombre: "Casas", dorsal: 18, posicion: "Defensa", foto: "/img/jugadores/cr7.jpg" },
-    { nombre: "Lukas", dorsal: 7, posicion: "Defensa", foto: "/img/jugadores/cr7.jpg" },
-    { nombre: "Beltrán", dorsal: 23, posicion: "Defensa", foto: "/img/jugadores/cr7.jpg" },
-    { nombre: "Kaloun", dorsal: 67, posicion: "Defensa", foto: "/img/jugadores/cr7.jpg" },
-    { nombre: "Gurry", dorsal: 6, posicion: "Centrocampista", foto: "/img/jugadores/cr7.jpg" },
-    { nombre: "Hugo", dorsal: 92, posicion: "Centrocampista", foto: "/img/jugadores/cr7.jpg" },
-    { nombre: "Hermoso", dorsal: 5, posicion: "Centrocampista", foto: "/img/jugadores/cr7.jpg" },
-    { nombre: "Mateo", dorsal: 14, posicion: "Centrocampista", foto: "/img/jugadores/cr7.jpg" },
-    { nombre: "Miguel", dorsal: 98, posicion: "Centrocampista", foto: "/img/jugadores/cr7.jpg" },
-    { nombre: "Herrera", dorsal: 10, posicion: "Delantero", foto: "/img/jugadores/cr7.jpg" },
-    { nombre: "Diego", dorsal: 69, posicion: "Delantero", foto: "/img/jugadores/cr7.jpg" },
-    { nombre: "Salas", dorsal: 9, posicion: "Delantero", foto: "/img/jugadores/cr7.jpg" },
-    { nombre: "Nico", dorsal: 80, posicion: "Delantero", foto: "/img/jugadores/cr7.jpg" },
-    { nombre: "Gastaca", dorsal: 1, posicion: "Delantero", foto: "/img/jugadores/cr7.jpg" }
+    { nombre: "Nacho", dorsal: 88, posicion: "Portero", foto: "/img/jugadores/nacho.png" },
+    { nombre: "Casas", dorsal: 18, posicion: "Defensa", foto: "/img/jugadores/casas.png" },
+    { nombre: "Lukas", dorsal: 7, posicion: "Defensa", foto: "/img/jugadores/lukas.png" },
+    { nombre: "Beltrán", dorsal: 23, posicion: "Defensa", foto: "/img/jugadores/beltran.png" },
+    { nombre: "Kaloun", dorsal: 67, posicion: "Defensa", foto: "/img/jugadores/kaloun.png" },
+    { nombre: "Gurry", dorsal: 6, posicion: "Centrocampista", foto: "/img/jugadores/gurry.png" },
+    { nombre: "Hugo", dorsal: 92, posicion: "Centrocampista", foto: "/img/jugadores/hugo.png" },
+    { nombre: "Hermoso", dorsal: 5, posicion: "Centrocampista", foto: "/img/jugadores/hermoso.png" },
+    { nombre: "Mateo", dorsal: 14, posicion: "Centrocampista", foto: "/img/jugadores/mateo.png" },
+    { nombre: "Miguel", dorsal: 98, posicion: "Centrocampista", foto: "/img/jugadores/miguel.png" },
+    { nombre: "Herrera", dorsal: 10, posicion: "Delantero", foto: "/img/jugadores/herrera.png" },
+    { nombre: "Diego", dorsal: 69, posicion: "Delantero", foto: "/img/jugadores/diego.png" },
+    { nombre: "Salas", dorsal: 9, posicion: "Delantero", foto: "/img/jugadores/salas.png" },
+    { nombre: "Nico", dorsal: 80, posicion: "Delantero", foto: "/img/jugadores/nico.png" },
+    { nombre: "Gastaca", dorsal: 1, posicion: "Delantero", foto: "/img/jugadores/gastaca.png" }
 ];
 
 // Datos de ejemplo para el calendario
@@ -272,8 +272,6 @@ function actualizarContadoresFiltros() {
     });
 }
 
-// EL RESTO DEL CÓDIGO PERMANECE IGUAL (generarCalendario, generarStarboy, etc.)
-// ... [mantén todo el código desde generarCalendario() hasta el final] ...
 
 // Función para generar los partidos del calendario MEJORADA
 let currentDate = new Date();
@@ -735,9 +733,9 @@ function initFooterFunctionalities() {
     }
 }
 
-// Inicializar todo cuando se carga la página
+// Inicializar todo cuando se carga la página (ESTA PARTE DEBE IR AL FINAL)
 document.addEventListener('DOMContentLoaded', function() {
-    generarPlantilla(); // ¡ESTA ES LA FUNCIÓN QUE FALTABA!
+    generarPlantilla();
     generarCalendario();
     generarStarboy();
     initSmoothScroll();
@@ -746,7 +744,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initHeaderEffects();
     initActiveNav();
     initPreloader();
-    initTogglePlantilla(); // Usa la versión corregida
+    initTogglePlantilla();
     initStatsCounter();
     initAboutCardsAnimation();
     initAboutCardsHover();
