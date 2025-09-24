@@ -22,7 +22,7 @@ const partidos = [
     { 
         rival: "Los Tigres", 
         local: false, 
-        fecha: "15/10/2023", 
+        fecha: "2025-09-15", 
         hora: "18:00", 
         lugar: "SMP Retiro",
         equipacion: "blanca",
@@ -31,7 +31,7 @@ const partidos = [
     { 
         rival: "Águilas FC", 
         local: true, 
-        fecha: "22/10/2023", 
+        fecha: "2024-01-22", 
         hora: "17:30", 
         lugar: "SMP Retiro",
         equipacion: "blanca",
@@ -40,7 +40,7 @@ const partidos = [
     { 
         rival: "Dragones Rojos", 
         local: false, 
-        fecha: "29/10/2023", 
+        fecha: "2024-01-29", 
         hora: "19:00", 
         lugar: "SMP Retiro",
         equipacion: "blanca",
@@ -49,7 +49,7 @@ const partidos = [
     { 
         rival: "Leones del Norte", 
         local: true, 
-        fecha: "05/11/2023", 
+        fecha: "2024-02-05", 
         hora: "16:00", 
         lugar: "SMP Retiro",
         equipacion: "blanca",
@@ -115,64 +115,160 @@ function generarPlantilla() {
 }
 
 // Función para generar los partidos del calendario MEJORADA
+let currentDate = new Date();
+let currentMonth = currentDate.getMonth();
+let currentYear = currentDate.getFullYear();
+
+// Función para generar el calendario
 function generarCalendario() {
-    const container = document.getElementById('calendario-container');
+    updateCalendar();
     
-    partidos.forEach((partido, index) => {
-        const matchCard = document.createElement('div');
-        const esProximo = index === 0; // El primer partido como "próximo"
-        const cardClass = `match-card ${partido.local ? 'local' : 'visitante'} ${esProximo ? 'proximo' : ''}`;
-        
-        matchCard.className = cardClass;
-        matchCard.style.animationDelay = `${index * 0.2}s`;
-        
-        const escudoHTML = partido.escudo 
-            ? `<img src="${partido.escudo}" alt="${partido.rival}" class="team-logo-img">`
-            : `<div class="team-logo-placeholder">${partido.rival.charAt(0)}</div>`;
-        
-        matchCard.innerHTML = `
-            <div class="match-header">
-                <div class="team-logo">
-                    ${escudoHTML}
-                </div>
-                <div class="vs-container">
-                    <div class="team-name ${partido.local ? 'rival' : 'peskitos'}">
-                        ${partido.local ? partido.rival : 'PESKITOS'}
-                    </div>
-                    <div class="vs-badge">VS</div>
-                    <div class="team-name ${partido.local ? 'peskitos' : 'rival'}">
-                        ${partido.local ? 'PESKITOS' : partido.rival}
-                    </div>
-                </div>
-            </div>
-            
-            <div class="match-info">
-                <div class="match-status">${partido.local ? '🏠 Local' : '✈️ Visitante'}</div>
-                <div class="match-details">
-                    <div class="detail-item">
-                        <i class="far fa-calendar"></i>
-                        <span class="detail-text">${partido.fecha}</span>
-                    </div>
-                    <div class="detail-item">
-                        <i class="far fa-clock"></i>
-                        <span class="detail-text">${partido.hora}</span>
-                    </div>
-                    <div class="detail-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span class="detail-text">${partido.lugar}</span>
-                    </div>
-                    <div class="detail-item">
-                        <i class="fas fa-shirt"></i>
-                        <span class="detail-text">${partido.equipacion}</span>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        container.appendChild(matchCard);
+    // Event listeners para los controles del calendario
+    document.getElementById('prev-month').addEventListener('click', () => {
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
+        updateCalendar();
+    });
+    
+    document.getElementById('next-month').addEventListener('click', () => {
+        currentMonth++;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        }
+        updateCalendar();
+    });
+    
+    document.getElementById('today').addEventListener('click', () => {
+        currentDate = new Date();
+        currentMonth = currentDate.getMonth();
+        currentYear = currentDate.getFullYear();
+        updateCalendar();
     });
 }
 
+// Función para actualizar el calendario
+function updateCalendar() {
+    const monthYearElement = document.getElementById('calendar-month-year');
+    const daysContainer = document.getElementById('calendar-days');
+    
+    // Actualizar el título del mes y año
+    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
+    monthYearElement.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+    
+    // Limpiar el contenedor de días
+    daysContainer.innerHTML = '';
+    
+    // Obtener el primer día del mes y el número de días
+    const firstDay = new Date(currentYear, currentMonth, 1);
+    const lastDay = new Date(currentYear, currentMonth + 1, 0);
+    const daysInMonth = lastDay.getDate();
+    const startingDay = firstDay.getDay(); // 0 = Domingo, 1 = Lunes, etc.
+    
+    // Añadir días vacíos al principio si es necesario
+    for (let i = 0; i < startingDay; i++) {
+        const emptyDay = document.createElement('div');
+        emptyDay.className = 'calendar-day empty';
+        daysContainer.appendChild(emptyDay);
+    }
+    
+    // Añadir los días del mes
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'calendar-day';
+        
+        // Formatear la fecha para comparar
+        const dateString = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        
+        // Verificar si hay partido en este día
+        const partidoDelDia = partidos.find(partido => partido.fecha === dateString);
+        
+        if (partidoDelDia) {
+            dayElement.classList.add('has-match');
+            dayElement.innerHTML = `
+                <div class="day-number">${day}</div>
+                <div class="match-indicator">
+                    <img src="${partidoDelDia.escudo}" alt="${partidoDelDia.rival}" class="team-logo-small">
+                    <span class="match-time">${partidoDelDia.hora}</span>
+                </div>
+            `;
+            
+            // Añadir evento click para abrir el modal
+            dayElement.addEventListener('click', () => openMatchModal(partidoDelDia));
+        } else {
+            dayElement.innerHTML = `<div class="day-number">${day}</div>`;
+        }
+        
+        // Marcar el día actual
+        const today = new Date();
+        if (currentYear === today.getFullYear() && 
+            currentMonth === today.getMonth() && 
+            day === today.getDate()) {
+            dayElement.classList.add('today');
+        }
+        
+        daysContainer.appendChild(dayElement);
+    }
+}
+
+// Función para abrir el modal con los detalles del partido
+function openMatchModal(partido) {
+    const modalBody = document.getElementById('matchModalBody');
+    
+    const escudoHTML = partido.escudo 
+        ? `<img src="${partido.escudo}" alt="${partido.rival}" class="team-logo-modal">`
+        : `<div class="team-logo-placeholder">${partido.rival.charAt(0)}</div>`;
+    
+    modalBody.innerHTML = `
+        <div class="match-modal-content">
+            <div class="match-header-modal">
+                <div class="team-info ${partido.local ? 'rival' : 'peskitos'}">
+                    ${partido.local ? partido.rival : 'PESKITOS'}
+                </div>
+                <div class="vs-badge-modal">VS</div>
+                <div class="team-info ${partido.local ? 'peskitos' : 'rival'}">
+                    ${partido.local ? 'PESKITOS' : partido.rival}
+                </div>
+            </div>
+            
+            <div class="team-logo-modal-container">
+                ${escudoHTML}
+            </div>
+            
+            <div class="match-details-modal">
+                <div class="detail-item-modal">
+                    <i class="far fa-calendar"></i>
+                    <span>${partido.fecha}</span>
+                </div>
+                <div class="detail-item-modal">
+                    <i class="far fa-clock"></i>
+                    <span>${partido.hora}</span>
+                </div>
+                <div class="detail-item-modal">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>${partido.lugar}</span>
+                </div>
+                <div class="detail-item-modal">
+                    <i class="fas fa-shirt"></i>
+                    <span>Equipación: ${partido.equipacion}</span>
+                </div>
+                <div class="detail-item-modal">
+                    <i class="fas fa-home"></i>
+                    <span>${partido.local ? 'Partido como local' : 'Partido como visitante'}</span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Mostrar el modal
+    const matchModal = new bootstrap.Modal(document.getElementById('matchModal'));
+    matchModal.show();
+}
 // Función para generar los Starboys - VERSIÓN MÓVIL SEGURA
 function generarStarboy() {
     const container = document.getElementById('starboy-container');
@@ -503,7 +599,6 @@ document.addEventListener('DOMContentLoaded', function() {
     generarPlantilla();
     generarCalendario();
     generarStarboy();
-    
     initSmoothScroll();
     initScrollAnimations();
     initParallax();

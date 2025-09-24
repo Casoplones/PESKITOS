@@ -173,18 +173,68 @@
 </section>
 
 <!-- Calendario -->
+<!-- Calendario -->
 <section id="calendario" class="py-5">
     <div class="container">
         <h2 class="section-title text-center mb-5">Calendario de Juego</h2>
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <div id="calendario-container">
-                    <!-- Los partidos se generarán dinámicamente con JavaScript -->
+                <!-- Controles del calendario -->
+                <div class="calendar-controls mb-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h3 id="calendar-month-year" class="mb-0"></h3>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <button id="prev-month" class="btn btn-outline-light btn-sm me-2">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button id="today" class="btn btn-outline-light btn-sm me-2">Hoy</button>
+                            <button id="next-month" class="btn btn-outline-light btn-sm">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Calendario -->
+                <div id="calendar-container" class="calendar-grid">
+                    <!-- Los días de la semana -->
+                    <div class="calendar-header">
+                        <div class="calendar-day-header">Dom</div>
+                        <div class="calendar-day-header">Lun</div>
+                        <div class="calendar-day-header">Mar</div>
+                        <div class="calendar-day-header">Mié</div>
+                        <div class="calendar-day-header">Jue</div>
+                        <div class="calendar-day-header">Vie</div>
+                        <div class="calendar-day-header">Sáb</div>
+                    </div>
+                    
+                    <!-- Los días del mes se generarán dinámicamente -->
+                    <div id="calendar-days" class="calendar-days"></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Modal para detalles del partido -->
+<div class="modal fade" id="matchModal" tabindex="-1" aria-labelledby="matchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="matchModalLabel">Detalles del Partido</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="matchModalBody">
+                <!-- Los detalles del partido se cargarán aquí -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- Starboy Peskitos -->
 <section id="starboy" class="py-5 bg-dark">
