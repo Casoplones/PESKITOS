@@ -70,27 +70,33 @@ const starboys = [
         nombre: "Javier López", 
         dorsal: 10, 
         estadistica: 12, 
-        tipo: "Asistencias",
+        tipo: "Tarjetas Amarillas",
         foto: "/img/jugadores/cr7.jpg"
     },
     { 
         nombre: "Miguel Ángel", 
         dorsal: 7, 
         estadistica: 24, 
-        tipo: "Goles + Asistencias",
+        tipo: "Tarjetas Rojas",
         foto: "/img/jugadores/cr7.jpg"
     }
 ];
 
-// Función para generar las tarjetas de jugadores MEJORADA
+// FUNCIÓN FALTANTE: Generar las tarjetas de jugadores
 function generarPlantilla() {
     const container = document.getElementById('plantilla-container');
+    if (!container) {
+        console.error('No se encontró el contenedor de plantilla');
+        return;
+    }
+    
+    container.innerHTML = ''; // Limpiar contenedor
     
     jugadores.forEach((jugador, index) => {
         const col = document.createElement('div');
-        col.className = 'col-md-4 col-lg-3';
+        col.className = 'col-md-4 col-lg-3 player-col';
         
-        // Determinar clase de posición para el estilo de color
+        // Determinar clase de posición para el estilo de color y filtrado
         const posicionClass = jugador.posicion.toLowerCase().replace(' ', '-');
         
         const imagenHTML = jugador.foto 
@@ -98,7 +104,7 @@ function generarPlantilla() {
             : `<div class="player-image placeholder-image">${jugador.nombre}</div>`;
         
         col.innerHTML = `
-            <div class="player-card" style="animation-delay: ${index * 0.1}s">
+            <div class="player-card" style="animation-delay: ${index * 0.1}s" data-position="${posicionClass}">
                 <div class="player-image-container">
                     <div class="dorsal">${jugador.dorsal}</div>
                     ${imagenHTML}
@@ -112,7 +118,141 @@ function generarPlantilla() {
         
         container.appendChild(col);
     });
+    
+    // Inicializar funcionalidad de filtrado
+    initFiltrosPlantilla();
 }
+
+// Función para expandir/plegar la plantilla (VERSIÓN CORRECTA)
+function initTogglePlantilla() {
+    const toggleBtn = document.getElementById('toggle-plantilla');
+    const plantillaContainer = document.getElementById('plantilla-container');
+    const filtrosContainer = document.getElementById('filtros-container');
+    const icon = toggleBtn.querySelector('i');
+    
+    if (!toggleBtn || !plantillaContainer || !filtrosContainer) {
+        console.error('Elementos necesarios para toggle no encontrados');
+        return;
+    }
+    
+    let isExpanded = true;
+    
+    toggleBtn.addEventListener('click', function() {
+        isExpanded = !isExpanded;
+        
+        // Cambiar icono
+        if (isExpanded) {
+            icon.classList.remove('fa-chevron-up');
+            icon.classList.add('fa-chevron-down');
+            plantillaContainer.classList.remove('collapsed');
+            if (filtrosContainer) {
+                filtrosContainer.classList.remove('collapsed');
+            }
+        } else {
+            icon.classList.remove('fa-chevron-down');
+            icon.classList.add('fa-chevron-up');
+            plantillaContainer.classList.add('collapsed');
+            if (filtrosContainer) {
+                filtrosContainer.classList.add('collapsed');
+            }
+        }
+        
+        // Añadir efecto de transición suave
+        plantillaContainer.style.transition = 'all 0.4s ease';
+        if (filtrosContainer) {
+            filtrosContainer.style.transition = 'all 0.4s ease';
+        }
+    });
+}
+
+// Función de filtrado (MEJORADA CON VALIDACIONES)
+function initFiltrosPlantilla() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const playerCards = document.querySelectorAll('.player-card');
+    const playerCols = document.querySelectorAll('.player-col');
+    
+    if (filterButtons.length === 0) {
+        console.warn('No se encontraron botones de filtro');
+        return;
+    }
+    
+    // Función para filtrar jugadores
+    function filtrarJugadores(filter) {
+        let visibleCount = 0;
+        
+        playerCards.forEach((card, index) => {
+            const position = card.getAttribute('data-position');
+            const col = playerCols[index];
+            
+            if (filter === 'todos' || position === filter) {
+                card.classList.remove('hidden', 'filtered-out');
+                card.classList.add('filtered-in');
+                if (col) col.style.display = 'block';
+                visibleCount++;
+            } else {
+                card.classList.remove('filtered-in');
+                card.classList.add('hidden', 'filtered-out');
+                if (col) col.style.display = 'none';
+            }
+        });
+        
+        // Actualizar contador
+        const counter = document.querySelector('.filter-counter');
+        if (counter) {
+            counter.textContent = `${visibleCount} jugador${visibleCount !== 1 ? 'es' : ''} encontrado${visibleCount !== 1 ? 's' : ''}`;
+        }
+    }
+    
+    // Event listeners para los botones de filtro
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Verificar que la plantilla esté expandida
+            const plantillaContainer = document.getElementById('plantilla-container');
+            if (plantillaContainer && plantillaContainer.classList.contains('collapsed')) {
+                return; // No hacer nada si está colapsada
+            }
+            
+            // Remover clase active de todos los botones
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Añadir clase active al botón clickeado
+            this.classList.add('active');
+            
+            // Filtrar jugadores
+            const filter = this.getAttribute('data-filter');
+            filtrarJugadores(filter);
+        });
+    });
+    
+    // Filtrar al cargar la página (mostrar todos)
+    filtrarJugadores('todos');
+    
+    // Actualizar contadores
+    actualizarContadoresFiltros();
+}
+
+// Función para actualizar los contadores de jugadores por posición
+function actualizarContadoresFiltros() {
+    const counts = {
+        'todos': jugadores.length,
+        'portero': jugadores.filter(j => j.posicion.toLowerCase() === 'portero').length,
+        'defensa': jugadores.filter(j => j.posicion.toLowerCase() === 'defensa').length,
+        'centrocampista': jugadores.filter(j => j.posicion.toLowerCase() === 'centrocampista').length,
+        'delantero': jugadores.filter(j => j.posicion.toLowerCase() === 'delantero').length
+    };
+    
+    // Actualizar los números en los botones
+    document.querySelectorAll('.filter-btn').forEach(button => {
+        const filter = button.getAttribute('data-filter');
+        const countSpan = button.querySelector('.filter-count');
+        if (countSpan && counts[filter] !== undefined) {
+            countSpan.textContent = `(${counts[filter]})`;
+        }
+    });
+}
+
+// EL RESTO DEL CÓDIGO PERMANECE IGUAL (generarCalendario, generarStarboy, etc.)
+// ... [mantén todo el código desde generarCalendario() hasta el final] ...
 
 // Función para generar los partidos del calendario MEJORADA
 let currentDate = new Date();
@@ -154,6 +294,8 @@ function generarCalendario() {
 function updateCalendar() {
     const monthYearElement = document.getElementById('calendar-month-year');
     const daysContainer = document.getElementById('calendar-days');
+    
+    if (!monthYearElement || !daysContainer) return;
     
     // Actualizar el título del mes y año
     const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -219,6 +361,7 @@ function updateCalendar() {
 // Función para abrir el modal con los detalles del partido
 function openMatchModal(partido) {
     const modalBody = document.getElementById('matchModalBody');
+    if (!modalBody) return;
     
     const escudoHTML = partido.escudo 
         ? `<img src="${partido.escudo}" alt="${partido.rival}" class="team-logo-modal">`
@@ -269,9 +412,11 @@ function openMatchModal(partido) {
     const matchModal = new bootstrap.Modal(document.getElementById('matchModal'));
     matchModal.show();
 }
+
 // Función para generar los Starboys - VERSIÓN MÓVIL SEGURA
 function generarStarboy() {
     const container = document.getElementById('starboy-container');
+    if (!container) return;
     
     // Detectar si es móvil
     const isMobile = window.innerWidth <= 768;
@@ -309,6 +454,8 @@ function generarStarboy() {
     
     container.appendChild(row);
 }
+
+// ... [el resto de las funciones permanecen igual] ...
 
 // Animación de contador para las estadísticas de "Sobre Nosotros"
 function initStatsCounter() {
@@ -484,33 +631,6 @@ function initPreloader() {
     });
 }
 
-// Función para expandir/plegar la plantilla
-function initTogglePlantilla() {
-    const toggleBtn = document.getElementById('toggle-plantilla');
-    const plantillaContainer = document.getElementById('plantilla-container');
-    const icon = toggleBtn.querySelector('i');
-    
-    let isExpanded = true;
-    
-    toggleBtn.addEventListener('click', function() {
-        isExpanded = !isExpanded;
-        
-        // Cambiar icono
-        if (isExpanded) {
-            icon.classList.remove('fa-chevron-up');
-            icon.classList.add('fa-chevron-down');
-            plantillaContainer.classList.remove('collapsed');
-        } else {
-            icon.classList.remove('fa-chevron-down');
-            icon.classList.add('fa-chevron-up');
-            plantillaContainer.classList.add('collapsed');
-        }
-        
-        // Añadir efecto de transición suave
-        plantillaContainer.style.transition = 'all 0.4s ease';
-    });
-}
-
 // Efectos de hover para las tarjetas de "Sobre Nosotros"
 function initAboutCardsHover() {
     const aboutCards = document.querySelectorAll('.about-card');
@@ -596,7 +716,7 @@ function initFooterFunctionalities() {
 
 // Inicializar todo cuando se carga la página
 document.addEventListener('DOMContentLoaded', function() {
-    generarPlantilla();
+    generarPlantilla(); // ¡ESTA ES LA FUNCIÓN QUE FALTABA!
     generarCalendario();
     generarStarboy();
     initSmoothScroll();
@@ -605,11 +725,10 @@ document.addEventListener('DOMContentLoaded', function() {
     initHeaderEffects();
     initActiveNav();
     initPreloader();
-    initTogglePlantilla();
+    initTogglePlantilla(); // Usa la versión corregida
     initStatsCounter();
     initAboutCardsAnimation();
     initAboutCardsHover();
     initAboutImageEffect();
     initFooterFunctionalities();
-
 });

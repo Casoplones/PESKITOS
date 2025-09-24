@@ -163,7 +163,7 @@
     </div>
 </section>
 
-    <!-- Plantilla -->
+<!-- Plantilla -->
 <section id="plantilla" class="py-5 bg-dark">
     <div class="container">
         <div class="section-header d-flex justify-content-center align-items-center mb-5">
@@ -172,13 +172,43 @@
                 <i class="fas fa-chevron-down"></i>
             </button>
         </div>
+        
+        <!-- Contenedor de filtros que se ocultará con la plantilla -->
+        <div id="filtros-container" class="filtros-wrapper">
+            <!-- Filtros por posición -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="filter-container text-center">
+                        <h4 class="filter-title mb-3">Filtrar por Posición</h4>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-filter="todos">
+                                Todos <span class="filter-count">(15)</span>
+                            </button>
+                            <button class="filter-btn" data-filter="portero">
+                                Porteros <span class="filter-count">(1)</span>
+                            </button>
+                            <button class="filter-btn" data-filter="defensa">
+                                Defensas <span class="filter-count">(4)</span>
+                            </button>
+                            <button class="filter-btn" data-filter="centrocampista">
+                                Centrocampistas <span class="filter-count">(5)</span>
+                            </button>
+                            <button class="filter-btn" data-filter="delantero">
+                                Delanteros <span class="filter-count">(5)</span>
+                            </button>
+                        </div>
+                        <div class="filter-counter mt-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div class="row g-4" id="plantilla-container">
             <!-- Las tarjetas de jugadores se generarán dinámicamente con JavaScript -->
         </div>
     </div>
 </section>
 
-<!-- Calendario -->
 <!-- Calendario -->
 <section id="calendario" class="py-5">
     <div class="container">
@@ -323,10 +353,17 @@
                         <i class="fab fa-instagram"></i>
                         <span>Instagram</span>
                     </a>
-                    <a href="#" class="social-link whatsapp">
-                        <i class="fab fa-whatsapp"></i>
+                    <!-- Enlace simple y seguro que abre WhatsApp Web o la app en móvil -->
+                        <a
+                        href="https://wa.me/34623509894?text=Hola%20%C2%BFC%C3%B3mo%20puedo%20ayudarte%3F"
+                        class="social-link whatsapp"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Abrir conversación de WhatsApp con 623509894"
+                        >
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
                         <span>WhatsApp</span>
-                    </a>
+                        </a>
                 </div>
                 
                 <div class="footer-cta mt-4">
