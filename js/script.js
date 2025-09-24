@@ -214,6 +214,69 @@ function generarStarboy() {
     container.appendChild(row);
 }
 
+// Animación de contador para las estadísticas de "Sobre Nosotros"
+function initStatsCounter() {
+    const statItems = document.querySelectorAll('.stat-item');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const statNumber = entry.target.querySelector('.stat-number');
+                const target = parseInt(statNumber.getAttribute('data-count'));
+                animateCounter(statNumber, target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    statItems.forEach(item => {
+        observer.observe(item);
+    });
+    
+    function animateCounter(element, target) {
+        let current = 0;
+        const increment = target / 50;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current);
+        }, 30);
+    }
+}
+
+// Animaciones para las tarjetas de "Sobre Nosotros"
+function initAboutCardsAnimation() {
+    const aboutCards = document.querySelectorAll('.about-card');
+    const statItems = document.querySelectorAll('.stat-item');
+    
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observar tarjetas de sobre nosotros
+    aboutCards.forEach(card => {
+        observer.observe(card);
+    });
+    
+    // Observar items de estadísticas
+    statItems.forEach(item => {
+        observer.observe(item);
+    });
+}
+
 // Observador de intersección para animaciones al hacer scroll
 function initScrollAnimations() {
     const observerOptions = {
@@ -352,6 +415,43 @@ function initTogglePlantilla() {
     });
 }
 
+// Efectos de hover para las tarjetas de "Sobre Nosotros"
+function initAboutCardsHover() {
+    const aboutCards = document.querySelectorAll('.about-card');
+    
+    aboutCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+}
+
+// Efecto de imagen en "Sobre Nosotros"
+function initAboutImageEffect() {
+    const aboutImage = document.querySelector('.about-image');
+    if (!aboutImage) return;
+    
+    aboutImage.addEventListener('mouseenter', function() {
+        this.style.transform = 'perspective(1000px) rotateY(0deg)';
+        const img = this.querySelector('img');
+        if (img) {
+            img.style.transform = 'scale(1.05)';
+        }
+    });
+    
+    aboutImage.addEventListener('mouseleave', function() {
+        this.style.transform = 'perspective(1000px) rotateY(-5deg)';
+        const img = this.querySelector('img');
+        if (img) {
+            img.style.transform = 'scale(1)';
+        }
+    });
+}
+
 // Inicializar todo cuando se carga la página
 document.addEventListener('DOMContentLoaded', function() {
     generarPlantilla();
@@ -365,4 +465,20 @@ document.addEventListener('DOMContentLoaded', function() {
     initActiveNav();
     initPreloader();
     initTogglePlantilla();
+    initStatsCounter();
+    initAboutCardsAnimation();
+    initAboutCardsHover();
+    initAboutImageEffect();
+});
+
+// Manejar el redimensionamiento de la ventana
+window.addEventListener('resize', function() {
+    // Re-generar starboy en móvil si es necesario
+    if (window.innerWidth <= 768 || window.innerWidth > 768) {
+        const starboyContainer = document.getElementById('starboy-container');
+        if (starboyContainer) {
+            starboyContainer.innerHTML = '';
+            generarStarboy();
+        }
+    }
 });
