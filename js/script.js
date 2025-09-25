@@ -4,16 +4,16 @@ const jugadores = [
     { nombre: "Casas", dorsal: 18, posicion: "Defensa", foto: "/img/jugadores/casas.png" },
     { nombre: "Lukas", dorsal: 7, posicion: "Defensa", foto: "/img/jugadores/lukas.png" },
     { nombre: "Beltrán", dorsal: 23, posicion: "Defensa", foto: "/img/jugadores/beltran.png" },
-    { nombre: "Kaloun", dorsal: 67, posicion: "Defensa", foto: "/img/jugadores/kaloun.png" },
+    { nombre: "Kaloun", dorsal: 67, posicion: "Defensa", foto: "/img/jugadores/soon.png" },
     { nombre: "Gurry", dorsal: 6, posicion: "Centrocampista", foto: "/img/jugadores/gurry.png" },
-    { nombre: "Hugo", dorsal: 92, posicion: "Centrocampista", foto: "/img/jugadores/hugo.png" },
+    { nombre: "Hugo", dorsal: 92, posicion: "Centrocampista", foto: "/img/jugadores/soon.png" },
     { nombre: "Hermoso", dorsal: 5, posicion: "Centrocampista", foto: "/img/jugadores/hermoso.png" },
     { nombre: "Mateo", dorsal: 14, posicion: "Centrocampista", foto: "/img/jugadores/mateo.png" },
     { nombre: "Miguel", dorsal: 98, posicion: "Centrocampista", foto: "/img/jugadores/miguel.png" },
     { nombre: "Herrera", dorsal: 10, posicion: "Delantero", foto: "/img/jugadores/herrera.png" },
-    { nombre: "Diego", dorsal: 69, posicion: "Delantero", foto: "/img/jugadores/diego.png" },
+    { nombre: "Diego", dorsal: 69, posicion: "Delantero", foto: "/img/jugadores/soon.png" },
     { nombre: "Salas", dorsal: 9, posicion: "Delantero", foto: "/img/jugadores/salas.png" },
-    { nombre: "Nico", dorsal: 80, posicion: "Delantero", foto: "/img/jugadores/nico.png" },
+    { nombre: "Nico", dorsal: 80, posicion: "Delantero", foto: "/img/jugadores/soon.png" },
     { nombre: "Gastaca", dorsal: 1, posicion: "Delantero", foto: "/img/jugadores/gastaca.png" }
 ];
 
@@ -60,25 +60,25 @@ const partidos = [
 // Datos para los Starboys
 const starboys = [
     { 
-        nombre: "Carlos Torres", 
-        dorsal: 9, 
-        estadistica: 15, 
+        nombre: "Sin datos", 
+        dorsal: 0, 
+        estadistica: 0, 
         tipo: "Goles",
-        foto: "/img/jugadores/cr7.jpg"
+        foto: "/img/jugadores/soon.png"
     },
     { 
-        nombre: "Javier López", 
-        dorsal: 10, 
-        estadistica: 12, 
-        tipo: "Tarjetas Amarillas",
-        foto: "/img/jugadores/cr7.jpg"
+        nombre: "Sin datos", 
+        dorsal: 0, 
+        estadistica: 0, 
+        tipo: "Goles",
+        foto: "/img/jugadores/soon.png"
     },
     { 
-        nombre: "Miguel Ángel", 
-        dorsal: 7, 
-        estadistica: 24, 
-        tipo: "Tarjetas Rojas",
-        foto: "/img/jugadores/cr7.jpg"
+        nombre: "Sin datos", 
+        dorsal: 0, 
+        estadistica: 0, 
+        tipo: "Goles",
+        foto: "/img/jugadores/soon.png"
     }
 ];
 

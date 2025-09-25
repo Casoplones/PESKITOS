@@ -1041,7 +1041,7 @@ section {
     transform: translate(-50%, -50%);
     font-size: clamp(6rem, 12vw, 9rem);
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.15);
+    color: rgba(143, 141, 141, 0.3);
     z-index: 1;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     font-family: 'Montserrat', sans-serif;
