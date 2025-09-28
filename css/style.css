@@ -2106,6 +2106,349 @@ body.loaded .loading-screen {
     transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
+/* Galería del Equipo - Carrusel Personalizado */
+#galeria {
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+#galeria::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 80% 20%, rgba(214, 33, 36, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(178, 155, 53, 0.05) 0%, transparent 50%);
+    z-index: 1;
+}
+
+#galeria .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Contenedor principal del carrusel */
+.custom-carousel-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Contenedor del carrusel */
+.custom-carousel {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(145deg, #1a1a1a 0%, #222 100%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Pista del carrusel */
+.carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Elementos del carrusel */
+.carousel-item {
+    flex: 0 0 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item:hover .carousel-image {
+    transform: scale(1.05);
+}
+
+/* Overlay de información */
+.carousel-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.carousel-item:hover .carousel-overlay {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.overlay-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--secondary-color);
+}
+
+.overlay-description {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* Controles de navegación */
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 10;
+}
+
+.carousel-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(214, 33, 36, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.carousel-btn:hover::before {
+    left: 100%;
+}
+
+.carousel-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(214, 33, 36, 0.6);
+}
+
+.carousel-btn i {
+    font-size: 1.5rem;
+}
+
+/* Indicadores personalizados */
+.custom-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.indicator::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    transition: left 0.3s ease;
+}
+
+.indicator.active::before {
+    left: 0;
+}
+
+.indicator.active {
+    transform: scale(1.2);
+    border-color: rgba(178, 155, 53, 0.5);
+}
+
+.indicator:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Contador de imágenes */
+.image-counter {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    z-index: 5;
+    border: 1px solid rgba(178, 155, 53, 0.3);
+}
+
+/* Efectos de brillo en los bordes */
+.custom-carousel::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+    border-radius: 22px;
+    z-index: -1;
+    opacity: 0.3;
+    filter: blur(5px);
+}
+
+/* Animación de entrada para las imágenes */
+.carousel-item {
+    animation: fadeInScale 0.8s ease-out;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .custom-carousel {
+        height: 400px;
+    }
+    
+    .carousel-btn {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .carousel-btn i {
+        font-size: 1.2rem;
+    }
+    
+    .overlay-title {
+        font-size: 1.3rem;
+    }
+    
+    .overlay-description {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .custom-carousel {
+        height: 350px;
+    }
+    
+    .carousel-controls {
+        padding: 0 10px;
+    }
+    
+    .carousel-btn {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .carousel-overlay {
+        padding: 20px;
+    }
+    
+    .overlay-title {
+        font-size: 1.1rem;
+    }
+    
+    .overlay-description {
+        font-size: 0.85rem;
+    }
+    
+    .custom-indicators {
+        margin-top: 25px;
+    }
+    
+    .indicator {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .custom-carousel {
+        height: 300px;
+    }
+    
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .carousel-btn i {
+        font-size: 1rem;
+    }
+    
+    .carousel-overlay {
+        padding: 15px;
+    }
+    
+    .overlay-title {
+        font-size: 1rem;
+    }
+    
+    .overlay-description {
+        font-size: 0.8rem;
+    }
+    
+    .image-counter {
+        bottom: 15px;
+        right: 15px;
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}
+
 
 /* Responsive Design */
 @media (max-width: 1200px) {

@@ -82,6 +82,41 @@ const starboys = [
     }
 ];
 
+// Datos de ejemplo para la galería
+const galeriaImagenes = [
+    {
+        src: "/img/galeria/equipo-completo.jpg",
+        titulo: "Equipo Completo 2024",
+        descripcion: "Todo el equipo reunido antes del inicio de temporada"
+    },
+    {
+        src: "/img/galeria/celebración-gol.jpg",
+        titulo: "Celebración de Gol",
+        descripcion: "Momento de alegría tras anotar un gol importante"
+    },
+    {
+        src: "/img/galeria/entrenamiento.jpg",
+        titulo: "Sesión de Entrenamiento",
+        descripcion: "Preparándonos para el próximo partido"
+    },
+    {
+        src: "/img/galeria/victoria.jpg",
+        titulo: "Victoria Importante",
+        descripcion: "Celebrando una victoria clave en la temporada"
+    },
+    {
+        src: "/img/galeria/momentos-equipo.jpg",
+        titulo: "Momento de Equipo",
+        descripcion: "Compañerismo y unión dentro y fuera del campo"
+    },
+    {
+        src: "/img/galeria/accion-partido.jpg",
+        titulo: "Acción de Partido",
+        descripcion: "Intenso momento durante un encuentro"
+    }
+];
+
+
 // FUNCIÓN FALTANTE: Generar las tarjetas de jugadores
 function generarPlantilla() {
     const container = document.getElementById('plantilla-container');
@@ -733,11 +768,169 @@ function initFooterFunctionalities() {
     }
 }
 
+// Variables globales para el carrusel
+let currentGalleryIndex = 0;
+let galleryInterval;
+
+// Función para generar la galería
+function generarGaleria() {
+    const carouselTrack = document.getElementById('carousel-track');
+    const customIndicators = document.getElementById('custom-indicators');
+    
+    if (!carouselTrack || !customIndicators) return;
+    
+    // Limpiar contenedores
+    carouselTrack.innerHTML = '';
+    customIndicators.innerHTML = '';
+    
+    // Generar elementos del carrusel
+    galeriaImagenes.forEach((imagen, index) => {
+        // Crear elemento del carrusel
+        const carouselItem = document.createElement('div');
+        carouselItem.className = 'carousel-item';
+        carouselItem.setAttribute('data-index', index);
+        
+        const imagenHTML = imagen.src 
+            ? `<img src="${imagen.src}" alt="${imagen.titulo}" class="carousel-image">`
+            : `<div class="carousel-image placeholder-image">${imagen.titulo}</div>`;
+        
+        carouselItem.innerHTML = `
+            ${imagenHTML}
+            <div class="carousel-overlay">
+                <h3 class="overlay-title">${imagen.titulo}</h3>
+                <p class="overlay-description">${imagen.descripcion}</p>
+            </div>
+        `;
+        
+        carouselTrack.appendChild(carouselItem);
+        
+        // Crear indicador
+        const indicator = document.createElement('div');
+        indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
+        indicator.setAttribute('data-index', index);
+        indicator.addEventListener('click', () => goToGallerySlide(index));
+        
+        customIndicators.appendChild(indicator);
+    });
+    
+    // Actualizar contador
+    updateGalleryCounter();
+    
+    // Iniciar autoplay
+    startGalleryAutoplay();
+}
+
+// Función para ir a una slide específica
+function goToGallerySlide(index) {
+    const carouselTrack = document.getElementById('carousel-track');
+    const indicators = document.querySelectorAll('.indicator');
+    
+    if (!carouselTrack || index < 0 || index >= galeriaImagenes.length) return;
+    
+    currentGalleryIndex = index;
+    
+    // Mover el carrusel
+    carouselTrack.style.transform = `translateX(-${index * 100}%)`;
+    
+    // Actualizar indicadores
+    indicators.forEach((indicator, i) => {
+        indicator.classList.toggle('active', i === index);
+    });
+    
+    // Actualizar contador
+    updateGalleryCounter();
+    
+    // Reiniciar autoplay
+    resetGalleryAutoplay();
+}
+
+// Función para siguiente imagen
+function nextGallerySlide() {
+    const nextIndex = (currentGalleryIndex + 1) % galeriaImagenes.length;
+    goToGallerySlide(nextIndex);
+}
+
+// Función para imagen anterior
+function prevGallerySlide() {
+    const prevIndex = (currentGalleryIndex - 1 + galeriaImagenes.length) % galeriaImagenes.length;
+    goToGallerySlide(prevIndex);
+}
+
+// Función para actualizar el contador
+function updateGalleryCounter() {
+    const currentImageElement = document.getElementById('current-image');
+    const totalImagesElement = document.getElementById('total-images');
+    
+    if (currentImageElement) {
+        currentImageElement.textContent = currentGalleryIndex + 1;
+    }
+    
+    if (totalImagesElement) {
+        totalImagesElement.textContent = galeriaImagenes.length;
+    }
+}
+
+// Función para iniciar autoplay
+function startGalleryAutoplay() {
+    galleryInterval = setInterval(nextGallerySlide, 5000); // Cambiar cada 5 segundos
+}
+
+// Función para reiniciar autoplay
+function resetGalleryAutoplay() {
+    clearInterval(galleryInterval);
+    startGalleryAutoplay();
+}
+
+// Función para pausar autoplay al interactuar
+function initGalleryInteractions() {
+    const carouselContainer = document.querySelector('.custom-carousel-container');
+    
+    if (!carouselContainer) return;
+    
+    // Pausar autoplay al hacer hover
+    carouselContainer.addEventListener('mouseenter', () => {
+        clearInterval(galleryInterval);
+    });
+    
+    // Reanudar autoplay al quitar el hover
+    carouselContainer.addEventListener('mouseleave', () => {
+        startGalleryAutoplay();
+    });
+    
+    // Event listeners para los botones de navegación
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', prevGallerySlide);
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', nextGallerySlide);
+    }
+    
+    // Navegación con teclado
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            prevGallerySlide();
+        } else if (e.key === 'ArrowRight') {
+            nextGallerySlide();
+        }
+    });
+}
+
+// Inicializar la galería
+function initGaleria() {
+    generarGaleria();
+    initGalleryInteractions();
+}
+
 // Inicializar todo cuando se carga la página (ESTA PARTE DEBE IR AL FINAL)
 document.addEventListener('DOMContentLoaded', function() {
     generarPlantilla();
     generarCalendario();
     generarStarboy();
+    initGaleria();
     initSmoothScroll();
     initScrollAnimations();
     initParallax();

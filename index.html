@@ -44,6 +44,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#starboy">Playmakers</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#galeria">Galería</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -280,6 +283,43 @@
         <h2 class="section-title text-center mb-5">Playmakers Peskitos</h2>
         <div class="row g-4 justify-content-center" id="starboy-container">
             <!-- Las tarjetas de playmakers se generarán dinámicamente con JavaScript -->
+        </div>
+    </div>
+</section>
+
+<!-- Galería del Equipo -->
+<section id="galeria" class="py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Galería del Equipo</h2>
+        
+        <!-- Carrusel Personalizado -->
+        <div class="custom-carousel-container">
+            <!-- Controles de navegación -->
+            <div class="carousel-controls">
+                <button class="carousel-btn prev-btn" aria-label="Imagen anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn next-btn" aria-label="Siguiente imagen">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <!-- Contenedor del carrusel -->
+            <div class="custom-carousel">
+                <div class="carousel-track" id="carousel-track">
+                    <!-- Las imágenes se generarán dinámicamente con JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Indicadores personalizados -->
+            <div class="custom-indicators" id="custom-indicators">
+                <!-- Los indicadores se generarán dinámicamente -->
+            </div>
+            
+            <!-- Contador de imágenes -->
+            <div class="image-counter">
+                <span id="current-image">1</span> / <span id="total-images">0</span>
+            </div>
         </div>
     </div>
 </section>
