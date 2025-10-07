@@ -188,21 +188,21 @@ const starboys = [
         dorsal: 0, 
         estadistica: 0, 
         tipo: "Goles",
-        foto: "/img/jugadores/soon.png"
+        foto: "/img/jugadores/soon.webp"
     },
     { 
         nombre: "Sin datos", 
         dorsal: 0, 
         estadistica: 0, 
         tipo: "Tarjetas Amarillas",
-        foto: "/img/jugadores/soon.png"
+        foto: "/img/jugadores/soon.webp"
     },
     { 
         nombre: "Sin datos", 
         dorsal: 0, 
         estadistica: 0, 
         tipo: "Tarjetas Rojas",
-        foto: "/img/jugadores/soon.png"
+        foto: "/img/jugadores/soon.webp"
     }
 ];
 
