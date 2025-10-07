@@ -3190,3 +3190,35 @@ body.loaded .loading-screen {
         -webkit-user-drag: none;
     }
 }
+
+/* Mejoras para el navbar en móvil */
+@media (max-width: 992px) {
+    .navbar-collapse {
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(178, 155, 53, 0.1) 100%);
+        backdrop-filter: blur(15px);
+        padding: 20px;
+        border-radius: 0 0 15px 15px;
+        margin-top: 10px;
+    }
+    
+    .navbar-nav .nav-link {
+        text-align: center;
+        margin: 5px 0;
+        padding: 12px 20px !important;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover {
+        background: rgba(214, 33, 36, 0.2);
+    }
+}
+
+/* Asegurar que el z-index sea correcto */
+.navbar {
+    z-index: 1030;
+}
+
+.navbar-collapse {
+    z-index: 1020;
+}
