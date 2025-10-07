@@ -1,20 +1,20 @@
 // Datos de ejemplo para la plantilla
 const jugadores = [
-    { nombre: "Tomás", dorsal: 0, posicion: "Entrenador", foto: "/img/jugadores/tomas.png" },
-    { nombre: "Nacho", dorsal: 88, posicion: "Portero", foto: "/img/jugadores/nacho.png" },
+    { nombre: "Tomás", dorsal: 0, posicion: "Entrenador", foto: "/img/jugadores/tomas.webp" },
+    { nombre: "Nacho", dorsal: 88, posicion: "Portero", foto: "/img/jugadores/nacho.webp" },
     { nombre: "Casas", dorsal: 18, posicion: "Defensa", foto: "/img/jugadores/casas.webp" },
     { nombre: "Lukas", dorsal: 7, posicion: "Defensa", foto: "/img/jugadores/lukas.webp" },
     { nombre: "Beltrán", dorsal: 23, posicion: "Defensa", foto: "/img/jugadores/beltran.webp" },
-    { nombre: "Kaloun", dorsal: 67, posicion: "Defensa", foto: "/img/jugadores/kaloun.png" },
+    { nombre: "Kaloun", dorsal: 67, posicion: "Defensa", foto: "/img/jugadores/kaloun.webp" },
     { nombre: "Gurry", dorsal: 6, posicion: "Centrocampista", foto: "/img/jugadores/gurry.webp" },
     { nombre: "Hugo", dorsal: 92, posicion: "Centrocampista", foto: "/img/jugadores/hugo.webp" },
     { nombre: "Hermoso", dorsal: 5, posicion: "Centrocampista", foto: "/img/jugadores/hermoso.webp" },
     { nombre: "Mateo", dorsal: 14, posicion: "Centrocampista", foto: "/img/jugadores/mateo.webp" },
-    { nombre: "Miguel", dorsal: 98, posicion: "Centrocampista", foto: "/img/jugadores/miguel.png" },
+    { nombre: "Miguel", dorsal: 98, posicion: "Centrocampista", foto: "/img/jugadores/miguel.webp" },
     { nombre: "Herrera", dorsal: 10, posicion: "Delantero", foto: "/img/jugadores/herrera.webp" },
-    { nombre: "Diego", dorsal: 69, posicion: "Delantero", foto: "/img/jugadores/soon.png" },
-    { nombre: "Salas", dorsal: 9, posicion: "Delantero", foto: "/img/jugadores/salas.png" },
-    { nombre: "Nico", dorsal: 80, posicion: "Delantero", foto: "/img/jugadores/nico.png" },
+    { nombre: "Diego", dorsal: 69, posicion: "Delantero", foto: "/img/jugadores/soon.webp" },
+    { nombre: "Salas", dorsal: 9, posicion: "Delantero", foto: "/img/jugadores/salas.webp" },
+    { nombre: "Nico", dorsal: 80, posicion: "Delantero", foto: "/img/jugadores/nico.webp" },
     { nombre: "Gastaca", dorsal: 1, posicion: "Delantero", foto: "/img/jugadores/gastaca.webp" }
 ];
 
