@@ -206,7 +206,31 @@ const starboys = [
     }
 ];
 
-
+// Prevenir gestos de zoom y desplazamiento no deseado - FUNCIÓN FALTANTE
+function preventUnwantedScroll() {
+    // Prevenir zoom con dos dedos
+    document.addEventListener('gesturestart', function(e) {
+        e.preventDefault();
+    });
+    
+    document.addEventListener('gesturechange', function(e) {
+        e.preventDefault();
+    });
+    
+    document.addEventListener('gestureend', function(e) {
+        e.preventDefault();
+    });
+    
+    // Prevenir desplazamiento con dos dedos en algunos navegadores
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function(event) {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false);
+}
 
 // FUNCIÓN FALTANTE: Generar las tarjetas de jugadores
 function generarPlantilla() {
@@ -887,6 +911,60 @@ function initActiveNav() {
     });
 }
 
+// Función completa para header sticky y menú móvil
+function initHeaderAndMenu() {
+    // HEADER STICKY
+    const header = document.querySelector('header');
+    
+    // Forzar posición sticky
+    header.style.position = 'fixed';
+    header.style.top = '0';
+    header.style.left = '0';
+    header.style.width = '100%';
+    header.style.zIndex = '1000';
+    
+    // Ajustar padding del body
+    document.body.style.paddingTop = header.offsetHeight + 'px';
+    
+    // MENÚ MÓVIL - Cerrar al hacer click
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Solo en móvil
+            if (window.innerWidth <= 992) {
+                // Cerrar el menú
+                const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                if (bsCollapse) {
+                    bsCollapse.hide();
+                }
+            }
+            
+            // Smooth scroll para el enlace clickeado
+            const targetId = this.getAttribute('href');
+            if (targetId.startsWith('#')) {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerHeight = header.offsetHeight;
+                    const targetPosition = targetElement.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+    
+    // Recalcular en resize
+    window.addEventListener('resize', function() {
+        document.body.style.paddingTop = header.offsetHeight + 'px';
+    });
+}
+
 // Preloader opcional
 function initPreloader() {
     window.addEventListener('load', () => {
@@ -987,6 +1065,8 @@ let galleryInterval;
 
 // Inicializar todo cuando se carga la página (ESTA PARTE DEBE IR AL FINAL)
 document.addEventListener('DOMContentLoaded', function() {
+    initHeaderAndMenu();
+    preventUnwantedScroll();
     generarPlantilla();
     generarCalendario();
     generarClasificacion();
