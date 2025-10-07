@@ -58,6 +58,129 @@ const partidos = [
     }
 ];
 
+const clasificacion = [
+    { 
+        posicion: 1, 
+        equipo: "Peskitos FC", 
+        escudo: "/img/equipos/escudo-peskitos.png",
+        puntos: 0, 
+        partidosJugados: 0, 
+        golesFavor: 0, 
+        golesContra: 0, 
+        diferenciaGoles: 0 
+    },
+    { 
+        posicion: 2, 
+        equipo: "Proximamente", 
+        escudo: "/img/equipos/icono.png",
+        puntos: 0, 
+        partidosJugados: 0, 
+        golesFavor: 0, 
+        golesContra: 0, 
+        diferenciaGoles: 0 
+    },
+    { 
+        posicion: 3, 
+        equipo: "Proximamente", 
+        escudo: "/img/equipos/icono.png",
+        puntos: 0, 
+        partidosJugados: 0, 
+        golesFavor: 0, 
+        golesContra: 0, 
+        diferenciaGoles: 0 
+    },
+    { 
+        posicion: 4, 
+        equipo: "Proximamente", 
+        escudo: "/img/equipos/icono.png",
+        puntos: 0, 
+        partidosJugados: 0, 
+        golesFavor: 0, 
+        golesContra: 0, 
+        diferenciaGoles: 0 
+    },
+    { 
+        posicion: 5, 
+        equipo: "Proximamente", 
+        escudo: "/img/equipos/icono.png",
+        puntos: 0, 
+        partidosJugados: 0, 
+        golesFavor: 0, 
+        golesContra: 0, 
+        diferenciaGoles: 0 
+    },
+    { 
+        posicion: 6, 
+        equipo: "Proximamente", 
+        escudo: "/img/equipos/icono.png",
+        puntos: 0, 
+        partidosJugados: 0, 
+        golesFavor: 0, 
+        golesContra: 0, 
+        diferenciaGoles: 0 
+    },
+    { 
+        posicion: 7, 
+        equipo: "Proximamente", 
+        escudo: "/img/equipos/icono.png",
+        puntos: 0, 
+        partidosJugados: 0, 
+        golesFavor: 0, 
+        golesContra: 0, 
+        diferenciaGoles: 0 
+    },
+    { 
+        posicion: 8, 
+        equipo: "Proximamente", 
+        escudo: "/img/equipos/icono.png",
+        puntos: 0, 
+        partidosJugados: 0, 
+        golesFavor: 0, 
+        golesContra: 0, 
+        diferenciaGoles: 0 
+    },
+    { 
+        posicion: 9, 
+        equipo: "Proximamente", 
+        escudo: "/img/equipos/icono.png",
+        puntos: 0, 
+        partidosJugados: 0, 
+        golesFavor: 0, 
+        golesContra: 0, 
+        diferenciaGoles: 0 
+    },
+    { 
+        posicion: 10, 
+        equipo: "Proximamente", 
+        escudo: "/img/equipos/icono.png",
+        puntos: 0, 
+        partidosJugados: 0, 
+        golesFavor: 0, 
+        golesContra: 0, 
+        diferenciaGoles: 0 
+    },
+    { 
+        posicion: 11, 
+        equipo: "Proximamente", 
+        escudo: "/img/equipos/icono.png",
+        puntos: 0, 
+        partidosJugados: 0, 
+        golesFavor: 0, 
+        golesContra: 0, 
+        diferenciaGoles: 0 
+    },
+    { 
+        posicion: 12, 
+        equipo: "Proximamente", 
+        escudo: "/img/equipos/icono.png",
+        puntos: 0, 
+        partidosJugados: 0, 
+        golesFavor: 0, 
+        golesContra: 0, 
+        diferenciaGoles: 0 
+    }
+];
+
 // Datos para los Starboys
 const starboys = [
     { 
@@ -436,6 +559,125 @@ function openMatchModal(partido) {
     matchModal.show();
 }
 
+// Función para generar la tabla de clasificación - VERSIÓN CORREGIDA
+function generarClasificacion() {
+    const tbody = document.getElementById('tabla-clasificacion-body');
+    if (!tbody) return;
+    
+    tbody.innerHTML = '';
+    
+    clasificacion.forEach((equipo, index) => {
+        const tr = document.createElement('tr');
+        
+        // Determinar clase especial para Peskitos FC
+        const isPeskitos = equipo.equipo === 'Peskitos FC';
+        const peskitosClass = isPeskitos ? 'team-peskitos' : '';
+        
+        // Determinar clase de posición para los primeros puestos
+        let positionClass = '';
+        if (equipo.posicion === 1) positionClass = 'position-1';
+        else if (equipo.posicion === 2) positionClass = 'position-2';
+        else if (equipo.posicion === 3) positionClass = 'position-3';
+        
+        // Determinar clases para estadísticas
+        const dgClass = equipo.diferenciaGoles > 0 ? 'stats-positive' : 
+                       equipo.diferenciaGoles < 0 ? 'stats-negative' : 'stats-neutral';
+        
+        const escudoHTML = equipo.escudo 
+            ? `<img src="${equipo.escudo}" alt="${equipo.equipo}" class="team-logo-table">`
+            : `<div class="team-logo-table placeholder-logo" style="background: linear-gradient(45deg, #333, #555); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem;">${equipo.equipo.charAt(0)}</div>`;
+        
+        tr.className = `${peskitosClass} ${positionClass}`;
+        tr.style.animationDelay = `${index * 0.1}s`;
+        
+        // CORREGIDO: Orden correcto de las columnas según los encabezados
+        tr.innerHTML = `
+            <td class="text-center">${equipo.posicion}</td>
+            <td>
+                <div class="team-info">
+                    ${escudoHTML}
+                    <span class="team-name">${equipo.equipo}</span>
+                </div>
+            </td>
+            <td class="text-center">${equipo.partidosJugados}</td>
+            <td class="text-center">${equipo.puntos}</td>
+            <td class="text-center">${equipo.golesFavor}</td>
+            <td class="text-center">${equipo.golesContra}</td>
+            <td class="text-center ${dgClass}">${equipo.diferenciaGoles > 0 ? '+' : ''}${equipo.diferenciaGoles}</td>
+        `;
+        
+        tbody.appendChild(tr);
+    });
+}
+
+// Función para inicializar el toggle de la clasificación
+function initToggleClasificacion() {
+    const toggleBtn = document.getElementById('toggle-clasificacion');
+    const clasificacionContainer = document.getElementById('clasificacion-container');
+    const clasificacionSection = document.getElementById('clasificacion');
+    const icon = toggleBtn.querySelector('i');
+    
+    if (!toggleBtn || !clasificacionContainer || !clasificacionSection) {
+        console.error('Elementos necesarios para toggle de clasificación no encontrados');
+        return;
+    }
+    
+    let isExpanded = true;
+    
+    toggleBtn.addEventListener('click', function() {
+        isExpanded = !isExpanded;
+        
+        // Cambiar icono
+        if (isExpanded) {
+            icon.classList.remove('fa-chevron-up');
+            icon.classList.add('fa-chevron-down');
+            clasificacionContainer.classList.remove('collapsed');
+            clasificacionSection.classList.remove('container-collapsed', 'container-collapsed-mobile');
+        } else {
+            icon.classList.remove('fa-chevron-down');
+            icon.classList.add('fa-chevron-up');
+            clasificacionContainer.classList.add('collapsed');
+            
+            // Añadir clases específicas para móvil
+            if (window.innerWidth <= 768) {
+                clasificacionSection.classList.add('container-collapsed');
+                if (window.innerWidth <= 576) {
+                    clasificacionSection.classList.add('container-collapsed-mobile');
+                }
+            }
+        }
+        
+        // Añadir efecto de transición suave
+        clasificacionContainer.style.transition = 'all 0.4s ease';
+        clasificacionSection.style.transition = 'padding 0.4s ease';
+        
+        // Forzar reflow para mejor animación
+        void clasificacionSection.offsetWidth;
+    });
+    
+    // Ajustar dinámicamente según el tamaño de pantalla
+    window.addEventListener('resize', function() {
+        if (!isExpanded) {
+            if (window.innerWidth <= 768) {
+                clasificacionSection.classList.add('container-collapsed');
+                if (window.innerWidth <= 576) {
+                    clasificacionSection.classList.add('container-collapsed-mobile');
+                }
+            } else {
+                clasificacionSection.classList.remove('container-collapsed', 'container-collapsed-mobile');
+            }
+        }
+    });
+    
+    // Inicializar estado según el tamaño de pantalla
+    if (window.innerWidth <= 768 && !isExpanded) {
+        clasificacionSection.classList.add('container-collapsed');
+        if (window.innerWidth <= 576) {
+            clasificacionSection.classList.add('container-collapsed-mobile');
+        }
+    }
+}
+
 // Función para generar los Starboys - VERSIÓN MÓVIL SEGURA
 function generarStarboy() {
     const container = document.getElementById('starboy-container');
@@ -747,6 +989,7 @@ let galleryInterval;
 document.addEventListener('DOMContentLoaded', function() {
     generarPlantilla();
     generarCalendario();
+    generarClasificacion();
     generarStarboy();
     initSmoothScroll();
     initScrollAnimations();
@@ -755,6 +998,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initActiveNav();
     initPreloader();
     initTogglePlantilla();
+    initToggleClasificacion(); // <-- Añadir esta línea
     initStatsCounter();
     initAboutCardsAnimation();
     initAboutCardsHover();

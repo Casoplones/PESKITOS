@@ -42,6 +42,9 @@
                             <a class="nav-link" href="#calendario">Calendario</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="#clasificacion">Clasificación</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="#starboy">Playmakers</a>
                         </li>
                     </ul>
@@ -276,6 +279,45 @@
         </div>
     </div>
 </div>
+
+<!-- Tabla de Clasificación -->
+<section id="clasificacion" class="py-5">
+    <div class="container">
+        <div class="section-header d-flex justify-content-center align-items-center mb-5">
+            <h2 class="section-title mb-0 me-3">Tabla de Clasificación</h2>
+            <button id="toggle-clasificacion" class="toggle-btn" aria-label="Expandir/plegar clasificación">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+
+        <div id="clasificacion-container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="table-container">
+                        <div class="table-responsive">
+                            <table class="table table-classification">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">POS</th>
+                                        <th scope="col" class="text-start">EQUIPO</th>
+                                        <th scope="col" class="text-center">PJ</th>
+                                        <th scope="col" class="text-center">PTS</th>
+                                        <th scope="col" class="text-center">GF</th>
+                                        <th scope="col" class="text-center">GC</th>
+                                        <th scope="col" class="text-center">DG</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-clasificacion-body">
+                                    <!-- Las filas se generarán dinámicamente con JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- Starboy Peskitos -->
 <section id="starboy" class="py-5 bg-dark">
