@@ -2,25 +2,80 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <!-- En la sección head de tu index.html -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Viewport optimizado para móvil -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    
+    <!-- Preconexiones críticas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    
+    <!-- Meta tags de rendimiento -->
     <meta name="handheldfriendly" content="true">
     <meta name="mobileoptimized" content="width">
-    <!-- Favicon - VERSIÓN COMPLETA -->
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Preload de recursos críticos -->
+    <link rel="preload" href="./img/equipos/escudo-peskitos.png" as="image" type="image/png">
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" as="style">
+    
+    <!-- Favicon optimizado -->
     <link rel="icon" type="image/x-icon" href="./img/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./img/favicon/favicon.png">
     <link rel="manifest" href="./site.webmanifest">
+    
     <title>Peskitos FC - Página Oficial</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- CSS Personalizado -->
-    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- CSS crítico inline (opcional - para above-the-fold) -->
+    <style>
+        /* CSS crítico mínimo para evitar FOUC */
+        .navbar, #hero { opacity: 1 !important; }
+        body { background-color: #000000; color: #ffffff; }
+    </style>
+    
+    <!-- Bootstrap 5 CSS - Cargado de forma asíncrona -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" 
+          media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    </noscript>
+    
+    <!-- Font Awesome - Cargado de forma asíncrona -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" 
+          media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </noscript>
+    
+    <!-- Google Fonts - Optimizado -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" 
+          rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    </noscript>
+    
+    <!-- CSS Personalizado - Cargado con prioridad -->
+    <link rel="stylesheet" href="css/style.css" media="all">
+    
+    <!-- DNS prefetch para recursos externos -->
+    <link rel="dns-prefetch" href="//maps.google.com">
+    <link rel="dns-prefetch" href="//www.google.com">
+    
+    <!-- Structured Data para SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SportsTeam",
+        "name": "Peskitos FC",
+        "sport": "Soccer",
+        "foundingDate": "2022",
+        "location": "SMP Retiro, Madrid"
+    }
+    </script>
 </head>
 <body>
     <!-- Header -->

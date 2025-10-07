@@ -2,20 +2,20 @@
 const jugadores = [
     { nombre: "Tomás", dorsal: 0, posicion: "Entrenador", foto: "/img/jugadores/tomas.png" },
     { nombre: "Nacho", dorsal: 88, posicion: "Portero", foto: "/img/jugadores/nacho.png" },
-    { nombre: "Casas", dorsal: 18, posicion: "Defensa", foto: "/img/jugadores/casas.png" },
-    { nombre: "Lukas", dorsal: 7, posicion: "Defensa", foto: "/img/jugadores/lukas.png" },
-    { nombre: "Beltrán", dorsal: 23, posicion: "Defensa", foto: "/img/jugadores/beltran.png" },
+    { nombre: "Casas", dorsal: 18, posicion: "Defensa", foto: "/img/jugadores/casas.webp" },
+    { nombre: "Lukas", dorsal: 7, posicion: "Defensa", foto: "/img/jugadores/lukas.webp" },
+    { nombre: "Beltrán", dorsal: 23, posicion: "Defensa", foto: "/img/jugadores/beltran.webp" },
     { nombre: "Kaloun", dorsal: 67, posicion: "Defensa", foto: "/img/jugadores/kaloun.png" },
-    { nombre: "Gurry", dorsal: 6, posicion: "Centrocampista", foto: "/img/jugadores/gurry.png" },
-    { nombre: "Hugo", dorsal: 92, posicion: "Centrocampista", foto: "/img/jugadores/hugo.png" },
-    { nombre: "Hermoso", dorsal: 5, posicion: "Centrocampista", foto: "/img/jugadores/hermoso.png" },
-    { nombre: "Mateo", dorsal: 14, posicion: "Centrocampista", foto: "/img/jugadores/mateo.png" },
+    { nombre: "Gurry", dorsal: 6, posicion: "Centrocampista", foto: "/img/jugadores/gurry.webp" },
+    { nombre: "Hugo", dorsal: 92, posicion: "Centrocampista", foto: "/img/jugadores/hugo.webp" },
+    { nombre: "Hermoso", dorsal: 5, posicion: "Centrocampista", foto: "/img/jugadores/hermoso.webp" },
+    { nombre: "Mateo", dorsal: 14, posicion: "Centrocampista", foto: "/img/jugadores/mateo.webp" },
     { nombre: "Miguel", dorsal: 98, posicion: "Centrocampista", foto: "/img/jugadores/miguel.png" },
-    { nombre: "Herrera", dorsal: 10, posicion: "Delantero", foto: "/img/jugadores/herrera.png" },
+    { nombre: "Herrera", dorsal: 10, posicion: "Delantero", foto: "/img/jugadores/herrera.webp" },
     { nombre: "Diego", dorsal: 69, posicion: "Delantero", foto: "/img/jugadores/soon.png" },
     { nombre: "Salas", dorsal: 9, posicion: "Delantero", foto: "/img/jugadores/salas.png" },
     { nombre: "Nico", dorsal: 80, posicion: "Delantero", foto: "/img/jugadores/nico.png" },
-    { nombre: "Gastaca", dorsal: 1, posicion: "Delantero", foto: "/img/jugadores/gastaca.png" }
+    { nombre: "Gastaca", dorsal: 1, posicion: "Delantero", foto: "/img/jugadores/gastaca.webp" }
 ];
 
 // Datos de ejemplo para el calendario
@@ -346,61 +346,179 @@ function initFiltrosPlantilla() {
         console.warn('No se encontraron botones de filtro');
         return;
     }
+
+    // Cache de elementos críticos
+    const plantillaContainer = document.getElementById('plantilla-container');
+    const counter = document.querySelector('.filter-counter');
+
+    // Pre-calcular filtros para mejor rendimiento
+    const filterCache = new Map();
     
-    // Función para filtrar jugadores
+    // Función optimizada para filtrar jugadores
     function filtrarJugadores(filter) {
-        let visibleCount = 0;
-        
-        playerCards.forEach((card, index) => {
-            const position = card.getAttribute('data-position');
-            const col = playerCols[index];
+        // Usar requestAnimationFrame para mejor rendimiento visual
+        requestAnimationFrame(() => {
+            let visibleCount = 0;
             
-            if (filter === 'todos' || position === filter) {
-                card.classList.remove('hidden', 'filtered-out');
-                card.classList.add('filtered-in');
-                if (col) col.style.display = 'block';
-                visibleCount++;
-            } else {
-                card.classList.remove('filtered-in');
-                card.classList.add('hidden', 'filtered-out');
-                if (col) col.style.display = 'none';
-            }
+            // Optimización: procesar en lotes para móvil
+            const processBatch = (startIndex, batchSize = 5) => {
+                const endIndex = Math.min(startIndex + batchSize, playerCards.length);
+                
+                for (let i = startIndex; i < endIndex; i++) {
+                    const card = playerCards[i];
+                    const col = playerCols[i];
+                    const position = card.getAttribute('data-position');
+                    
+                    const shouldShow = filter === 'todos' || position === filter;
+                    
+                    if (shouldShow) {
+                        card.classList.remove('hidden', 'filtered-out');
+                        card.classList.add('filtered-in');
+                        if (col) {
+                            col.style.display = 'block';
+                            col.style.willChange = 'transform'; // Optimización GPU
+                        }
+                        visibleCount++;
+                    } else {
+                        card.classList.remove('filtered-in');
+                        card.classList.add('hidden', 'filtered-out');
+                        if (col) {
+                            col.style.display = 'none';
+                        }
+                    }
+                }
+                
+                // Procesar siguiente lote si es necesario
+                if (endIndex < playerCards.length) {
+                    setTimeout(() => processBatch(endIndex, batchSize), 0);
+                } else {
+                    // Actualizar contador una vez al final
+                    if (counter) {
+                        counter.textContent = `${visibleCount} jugador${visibleCount !== 1 ? 'es' : ''} encontrado${visibleCount !== 1 ? 's' : ''}`;
+                    }
+                    
+                    // Forzar composición layer para mejor rendimiento
+                    playerCols.forEach(col => {
+                        if (col.style.display === 'block') {
+                            col.style.transform = 'translateZ(0)';
+                        }
+                    });
+                }
+            };
+            
+            // Iniciar procesamiento por lotes
+            processBatch(0, window.innerWidth <= 768 ? 3 : 5); // Lotes más pequeños en móvil
         });
-        
-        // Actualizar contador
-        const counter = document.querySelector('.filter-counter');
-        if (counter) {
-            counter.textContent = `${visibleCount} jugador${visibleCount !== 1 ? 'es' : ''} encontrado${visibleCount !== 1 ? 's' : ''}`;
-        }
     }
-    
-    // Event listeners para los botones de filtro
+
+    // Debounce para evitar múltiples ejecuciones rápidas
+    let filterTimeout;
+    function debouncedFilter(filter) {
+        clearTimeout(filterTimeout);
+        filterTimeout = setTimeout(() => filtrarJugadores(filter), 50);
+    }
+
+    // Event listeners optimizados
     filterButtons.forEach(button => {
+        // Usar event delegation más eficiente
         button.addEventListener('click', function() {
-            // Verificar que la plantilla esté expandida
-            const plantillaContainer = document.getElementById('plantilla-container');
+            // Verificación rápida de estado colapsado
             if (plantillaContainer && plantillaContainer.classList.contains('collapsed')) {
-                return; // No hacer nada si está colapsada
+                return;
             }
             
-            // Remover clase active de todos los botones
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Añadir clase active al botón clickeado
-            this.classList.add('active');
-            
-            // Filtrar jugadores
             const filter = this.getAttribute('data-filter');
-            filtrarJugadores(filter);
+            
+            // Optimización: evitar re-render si ya está activo
+            if (this.classList.contains('active')) return;
+            
+            // Cambiar estado de botones de forma eficiente
+            filterButtons.forEach(btn => {
+                btn.classList.toggle('active', btn === this);
+            });
+            
+            // Aplicar filtro con debounce
+            debouncedFilter(filter);
         });
+        
+        // Mejorar respuesta táctil en móvil
+        if ('ontouchstart' in window) {
+            button.addEventListener('touchstart', function(e) {
+                this.style.transform = 'scale(0.95)';
+            }, { passive: true });
+            
+            button.addEventListener('touchend', function(e) {
+                this.style.transform = '';
+            }, { passive: true });
+        }
     });
-    
-    // Filtrar al cargar la página (mostrar todos)
-    filtrarJugadores('todos');
-    
-    // Actualizar contadores
-    actualizarContadoresFiltros();
+
+    // Inicialización optimizada
+    function initializeFilters() {
+        // Usar MutationObserver para detectar cambios en la plantilla
+        if (plantillaContainer) {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'attributes' && 
+                        mutation.attributeName === 'class' &&
+                        !plantillaContainer.classList.contains('collapsed')) {
+                        // Re-aplicar filtro actual cuando se expande
+                        const activeFilter = document.querySelector('.filter-btn.active');
+                        if (activeFilter) {
+                            const filter = activeFilter.getAttribute('data-filter');
+                            debouncedFilter(filter);
+                        }
+                    }
+                });
+            });
+            
+            observer.observe(plantillaContainer, { 
+                attributes: true, 
+                attributeFilter: ['class'] 
+            });
+        }
+        
+        // Aplicar filtro inicial
+        setTimeout(() => filtrarJugadores('todos'), 100);
+        
+        // Actualizar contadores después de la renderización inicial
+        setTimeout(actualizarContadoresFiltros, 200);
+    }
+
+    // Inicializar cuando el contenido esté listo
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeFilters);
+    } else {
+        initializeFilters();
+    }
 }
+
+// Función auxiliar para mejorar el rendimiento en filtros complejos
+function optimizeFilterPerformance() {
+    // Aplicar optimizaciones CSS para mejor rendimiento
+    const style = document.createElement('style');
+    style.textContent = `
+        .player-col {
+            contain: layout style paint;
+            transform: translateZ(0);
+        }
+        .player-card {
+            will-change: transform, opacity;
+        }
+        @media (max-width: 768px) {
+            .player-card {
+                transition: opacity 0.2s ease;
+            }
+            .filter-btn.active {
+                transition: all 0.15s ease;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Llamar a la optimización al inicializar
+optimizeFilterPerformance();
 
 // Función para actualizar los contadores de jugadores por posición
 function actualizarContadoresFiltros() {
