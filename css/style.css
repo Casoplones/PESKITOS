@@ -3143,3 +3143,46 @@ body.loaded .loading-screen {
         transform: translateY(0);
     }
 }
+
+/* Prevenir zoom y desplazamiento no deseado en móvil */
+@media (max-width: 768px) {
+    body {
+        touch-action: pan-y;
+        -webkit-overflow-scrolling: touch;
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+    }
+    
+    html {
+        overflow-x: hidden;
+        position: relative;
+        height: 100%;
+    }
+    
+    /* Prevenir zoom en inputs */
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+    
+    /* Prevenir selección de texto accidental */
+    * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    /* Permitir selección en elementos que lo necesiten */
+    p, h1, h2, h3, h4, h5, h6, span, a {
+        -webkit-user-select: text;
+        user-select: text;
+    }
+}
+
+/* Para iOS específicamente */
+@supports (-webkit-touch-callout: none) {
+    body {
+        -webkit-user-drag: none;
+    }
+}
