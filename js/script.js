@@ -71,7 +71,7 @@ const clasificacion = [
     },
     { 
         posicion: 2, 
-        equipo: "Proximamente", 
+        equipo: "UD Monegros", 
         escudo: "/img/equipos/icono.png",
         puntos: 0, 
         partidosJugados: 0, 
@@ -81,7 +81,7 @@ const clasificacion = [
     },
     { 
         posicion: 3, 
-        equipo: "Proximamente", 
+        equipo: "Makakos FC", 
         escudo: "/img/equipos/icono.png",
         puntos: 0, 
         partidosJugados: 0, 
@@ -91,7 +91,7 @@ const clasificacion = [
     },
     { 
         posicion: 4, 
-        equipo: "Proximamente", 
+        equipo: "Rayo Hortaleza", 
         escudo: "/img/equipos/icono.png",
         puntos: 0, 
         partidosJugados: 0, 
@@ -101,7 +101,7 @@ const clasificacion = [
     },
     { 
         posicion: 5, 
-        equipo: "Proximamente", 
+        equipo: "Pacifico Panzón", 
         escudo: "/img/equipos/icono.png",
         puntos: 0, 
         partidosJugados: 0, 
@@ -111,7 +111,7 @@ const clasificacion = [
     },
     { 
         posicion: 6, 
-        equipo: "Proximamente", 
+        equipo: "Berrakos FC", 
         escudo: "/img/equipos/icono.png",
         puntos: 0, 
         partidosJugados: 0, 
@@ -121,7 +121,7 @@ const clasificacion = [
     },
     { 
         posicion: 7, 
-        equipo: "Proximamente", 
+        equipo: "AC Cuñados", 
         escudo: "/img/equipos/icono.png",
         puntos: 0, 
         partidosJugados: 0, 
@@ -131,7 +131,7 @@ const clasificacion = [
     },
     { 
         posicion: 8, 
-        equipo: "Proximamente", 
+        equipo: "Rayo Canchas", 
         escudo: "/img/equipos/icono.png",
         puntos: 0, 
         partidosJugados: 0, 
@@ -141,7 +141,7 @@ const clasificacion = [
     },
     { 
         posicion: 9, 
-        equipo: "Proximamente", 
+        equipo: "Bordaleta", 
         escudo: "/img/equipos/icono.png",
         puntos: 0, 
         partidosJugados: 0, 
@@ -151,7 +151,7 @@ const clasificacion = [
     },
     { 
         posicion: 10, 
-        equipo: "Proximamente", 
+        equipo: "Camleones FC", 
         escudo: "/img/equipos/icono.png",
         puntos: 0, 
         partidosJugados: 0, 
@@ -160,8 +160,8 @@ const clasificacion = [
         diferenciaGoles: 0 
     },
     { 
-        posicion: 11, 
-        equipo: "Proximamente", 
+        posicion: 11,
+        equipo: "Sporting de Madrid", 
         escudo: "/img/equipos/icono.png",
         puntos: 0, 
         partidosJugados: 0, 
@@ -171,7 +171,17 @@ const clasificacion = [
     },
     { 
         posicion: 12, 
-        equipo: "Proximamente", 
+        equipo: "Pikermans", 
+        escudo: "/img/equipos/icono.png",
+        puntos: 0, 
+        partidosJugados: 0, 
+        golesFavor: 0, 
+        golesContra: 0, 
+        diferenciaGoles: 0 
+    },
+    { 
+        posicion: 13, 
+        equipo: "Hidratos de Malboro", 
         escudo: "/img/equipos/icono.png",
         puntos: 0, 
         partidosJugados: 0, 
