@@ -81,7 +81,7 @@ const clasificacion = [
     { 
         posicion: 2, 
         equipo: "UD Monegros", 
-        escudo: "/img/equipos/icono.png",
+        escudo: "/img/equipos/monegros.png",
         puntos: 0, 
         partidosJugados: 0, 
         golesFavor: 0, 
@@ -91,7 +91,7 @@ const clasificacion = [
     { 
         posicion: 3, 
         equipo: "Makakos FC", 
-        escudo: "/img/equipos/icono.png",
+        escudo: "/img/equipos/makakos.png",
         puntos: 0, 
         partidosJugados: 0, 
         golesFavor: 0, 
@@ -101,7 +101,7 @@ const clasificacion = [
     { 
         posicion: 4, 
         equipo: "Rayo Hortaleza", 
-        escudo: "/img/equipos/icono.png",
+        escudo: "/img/equipos/rayohortaleza.png",
         puntos: 0, 
         partidosJugados: 0, 
         golesFavor: 0, 
@@ -111,7 +111,7 @@ const clasificacion = [
     { 
         posicion: 5, 
         equipo: "Pacifico Panzón", 
-        escudo: "/img/equipos/icono.png",
+        escudo: "/img/equipos/pacifico.png",
         puntos: 0, 
         partidosJugados: 0, 
         golesFavor: 0, 
@@ -121,7 +121,7 @@ const clasificacion = [
     { 
         posicion: 6, 
         equipo: "Berrakos FC", 
-        escudo: "/img/equipos/icono.png",
+        escudo: "/img/equipos/berrakos.png",
         puntos: 0, 
         partidosJugados: 0, 
         golesFavor: 0, 
@@ -131,7 +131,7 @@ const clasificacion = [
     { 
         posicion: 7, 
         equipo: "AC Cuñados", 
-        escudo: "/img/equipos/icono.png",
+        escudo: "/img/equipos/inter.png",
         puntos: 0, 
         partidosJugados: 0, 
         golesFavor: 0, 
@@ -141,7 +141,7 @@ const clasificacion = [
     { 
         posicion: 8, 
         equipo: "Rayo Canchas", 
-        escudo: "/img/equipos/icono.png",
+        escudo: "/img/equipos/rayocanchas.png",
         puntos: 0, 
         partidosJugados: 0, 
         golesFavor: 0, 
@@ -151,7 +151,7 @@ const clasificacion = [
     { 
         posicion: 9, 
         equipo: "Bordaleta", 
-        escudo: "/img/equipos/icono.png",
+        escudo: "/img/equipos/bordaleta.png",
         puntos: 0, 
         partidosJugados: 0, 
         golesFavor: 0, 
@@ -181,7 +181,7 @@ const clasificacion = [
     { 
         posicion: 12, 
         equipo: "Pikermans", 
-        escudo: "/img/equipos/icono.png",
+        escudo: "/img/equipos/pikermans.png",
         puntos: 0, 
         partidosJugados: 0, 
         golesFavor: 0, 
@@ -191,7 +191,7 @@ const clasificacion = [
     { 
         posicion: 13, 
         equipo: "Hidratos de Malboro", 
-        escudo: "/img/equipos/icono.png",
+        escudo: "/img/equipos/malboro.png",
         puntos: 0, 
         partidosJugados: 0, 
         golesFavor: 0, 
