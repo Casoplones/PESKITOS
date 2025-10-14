@@ -21,37 +21,46 @@ const jugadores = [
 // Datos de ejemplo para el calendario
 const partidos = [
     { 
-        rival: "Los Tigres", 
+        rival: "Sporting de Madrid", 
         local: false, 
-        fecha: "2025-09-15", 
+        fecha: "2025-10-19", 
         hora: "18:00", 
         lugar: "SMP Retiro",
         equipacion: "blanca",
         escudo: "/img/equipos/inter.png"
     },
     { 
-        rival: "Águilas FC", 
+        rival: "Hidratos de Malboro", 
         local: true, 
-        fecha: "2024-01-22", 
-        hora: "17:30", 
+        fecha: "2024-10-26", 
+        hora: "20:00", 
         lugar: "SMP Retiro",
         equipacion: "blanca",
         escudo: "/img/equipos/inter.png"
     },
     { 
-        rival: "Dragones Rojos", 
+        rival: "UD Monegros", 
         local: false, 
-        fecha: "2024-01-29", 
-        hora: "19:00", 
+        fecha: "2024-11-16", 
+        hora: "17:00", 
         lugar: "SMP Retiro",
         equipacion: "blanca",
         escudo: "/img/equipos/inter.png"
     },
     { 
-        rival: "Leones del Norte", 
+        rival: "Berrakos FC", 
         local: true, 
-        fecha: "2024-02-05", 
-        hora: "16:00", 
+        fecha: "2024-11-30", 
+        hora: "xx:xx", 
+        lugar: "SMP Retiro",
+        equipacion: "blanca",
+        escudo: "/img/equipos/inter.png"
+    },
+    { 
+        rival: "Berrakos FC", 
+        local: true, 
+        fecha: "2024-11-30", 
+        hora: "xx:xx", 
         lugar: "SMP Retiro",
         equipacion: "blanca",
         escudo: "/img/equipos/inter.png"
