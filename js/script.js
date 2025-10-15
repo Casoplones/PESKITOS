@@ -2,7 +2,6 @@
 const jugadores = [
     { nombre: "Tomás", dorsal: 0, posicion: "Entrenador", foto: "/img/jugadores/tomas.webp" },
     { nombre: "Nacho", dorsal: 88, posicion: "Portero", foto: "/img/jugadores/nacho.webp" },
-    { nombre: "Casas", dorsal: 18, posicion: "Defensa", foto: "/img/jugadores/casas.webp" },
     { nombre: "Lukas", dorsal: 7, posicion: "Defensa", foto: "/img/jugadores/lukas.webp" },
     { nombre: "Beltrán", dorsal: 23, posicion: "Defensa", foto: "/img/jugadores/beltran.webp" },
     { nombre: "Kaloun", dorsal: 67, posicion: "Defensa", foto: "/img/jugadores/kaloun.webp" },
